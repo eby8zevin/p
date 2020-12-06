@@ -55,9 +55,9 @@ include 'koneksi.php'
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
     
-    $ambil = "SELECT * FROM data_mhs WHERE NIM='$NIM'";
+    $ambil = "SELECT * FROM data_mhs WHERE NIM='$NIM', array(), array( "Scrollable" => SQLSRV_CURSOR_KEYSET )";
     $query=sqlsrv_query($conn, $ambil) or die(sqlsrv_errors());
-    if (sqlsrv_num_rows($query)>0) {
+    if (sqlsrv_num_rows($query)===false) {
      echo "<script>alert('Gagal: NIM sudah ada');</script>";
      echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     } else {
