@@ -10,7 +10,7 @@
  if ($query) {
   //redirect ke halaman index
   echo "<script>alert('Data berhasil dihapus!');history.go(-1);</script>";
-  //header("Location:index.php");
+  echo "<meta http-equiv='refresh' content='0;url=index.php?datadihapus=sukses'>";
  }
  
 ?>
