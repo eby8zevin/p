@@ -63,7 +63,7 @@ include 'koneksi.php'
     
     $row_count = sqlsrv_num_rows( $query );
     if ($row_count === false) {
-     echo "<script>alert('Gagal: NIM sudah ada');</script>";
+     echo "<script>alert('Gagal: NIM sudah ada.');</script>";
      echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     } else {
      sqlsrv_query($conn, "INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')");
