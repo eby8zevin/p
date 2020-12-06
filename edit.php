@@ -22,7 +22,7 @@ include 'koneksi.php';
    $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
    $data=sqlsrv_fetch_array($query);
   ?>
-  
+  <?php echo $data['NIM']; ?>
  </div
 
 </body>
