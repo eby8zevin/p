@@ -57,13 +57,13 @@ include 'koneksi.php'
     
     $sql="INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-    if ($query) {
+    if (sqlsrv_fetch_array($query)==1) {
+     echo "<script>alert('Gagal: NIM sudah ada');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
+    } else {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadisimpan=sukses'>";
-    } else {
-     echo "<script>alert('Data gagal ditambahkan!');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     }
    }
   sqlsrv_close( $conn );
