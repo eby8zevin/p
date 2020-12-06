@@ -61,6 +61,9 @@ include 'koneksi.php'
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadisimpan=sukses'>";
+    } else {
+     echo "<script>alert('Data gagal ditambahkan!');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     }
    }
   sqlsrv_close( $conn );
