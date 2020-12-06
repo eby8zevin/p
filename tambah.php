@@ -62,7 +62,7 @@ include 'koneksi.php'
     $query=sqlsrv_query($conn, $ambil, $params, $option) or die(sqlsrv_errors());
     
     $row_count = sqlsrv_num_rows( $query );
-    if ($row_count === false) {
+    if ($row_count == 1) {
      echo "<script>alert('Gagal: NIM sudah ada.');</script>";
      echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     } else {
