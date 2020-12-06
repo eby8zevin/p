@@ -29,7 +29,6 @@ include 'koneksi.php'
        <option disabled="" selected="">-Pilih-</option>
        <option value="Teknik Informatika">Teknik Informatika</option>
        <option value="Manajemen Informatika">Manajemen Informatika</option>
-       <option value="Sistem Informasi">Sistem Informasi</option>
       </select>
      </td>
     </tr>
@@ -56,12 +55,12 @@ include 'koneksi.php'
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
     
-    $sql="INSERT INTO data_mhs (ID, NIM, Nama, Prodi, TanggalBulanTahun) VALUES (100, '$NIM', '$Nama', '$Prodi', '$TBT')";
+    $sql="INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
-     //echo "<script>alert('Data berhasil di tambahkan!');history.go(-1);</script>";
-     header("Location:index.php");
+     echo "<script>alert('Data berhasil di tambahkan!');history.go(-1);</script>";
+     //header("Location:index.php");
     }
    }
   ?>
