@@ -39,7 +39,7 @@ include 'koneksi.php';
       <td><?php echo $data['Nama']; ?></td>
       <td><?php echo $data['Jurusan']; ?></td>
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
-      <td>Edit</td>
+      <td><?php echo $data['Jurusan']; ?> Edit</td>
      </tr>
     <?php } ?>
    </tbody>
