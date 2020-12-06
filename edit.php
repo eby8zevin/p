@@ -24,7 +24,7 @@ include 'koneksi.php'
   ?>
   
   <table>
-   <form method="POST" >
+   <form method="POST">
     <tr>
      <td>NIM :</td>
      <td><input type="text" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>"></td>
@@ -63,7 +63,7 @@ include 'koneksi.php'
    //eksekusi simpan data
    if (isset($_POST['edit'])) {
     # code...
-    //data IDMhsw berasal dari select berdasarkan id
+    //data ID data_mhs berasal dari select berdasarkan id
     $ID=$data['ID'];
 
     //data dari form
