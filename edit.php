@@ -15,9 +15,9 @@ include 'koneksi.php';
   
   <?php
    //ambil data id dari parameter
-   $ID=$_GET['ID'];
+   $ID=$_GET['id'];
    //select data dari tabel data_mhs berdasarkan id
-   $sql="SELECT * FROM data_mhs WHERE ID='$ID'";
+   $sql="SELECT * FROM data_mhs WHERE ID_datamhs='$ID'";
    
    $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
    $data=sqlsrv_fetch_array($query);
