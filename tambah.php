@@ -60,9 +60,10 @@ include 'koneksi.php'
     if ($query) {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=index.php?datatersimpan=sukses'>";
+     echo "<meta http-equiv='refresh' content='0;url=index.php?datadisimpan=sukses'>";
     }
    }
+  sqlsrv_close( $conn );
   ?>
   
  </div>
