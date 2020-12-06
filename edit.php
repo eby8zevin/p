@@ -2,6 +2,7 @@
 include 'koneksi.php';
 
 //ambil data id dari parameter
+//data ID data_mhs berasal dari select berdasarkan id
 $ID=$_GET['id'];
 //select data dari tabel data_mhs berdasarkan id
 $sql="SELECT * FROM data_mhs WHERE ID_datamhs='$ID'";
@@ -60,16 +61,13 @@ $data=sqlsrv_fetch_array($query);
    //eksekusi simpan data
    if (isset($_POST['edit'])) {
     # code...
-    //data ID data_mhs berasal dari select berdasarkan id
-    $ID_datamhs=$data['ID_datamhs'];
-
     //data dari form
     $NIM=$_POST['NIM'];
     $Nama=$_POST['Nama'];
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
 
-    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID_datamhs'";
+    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
