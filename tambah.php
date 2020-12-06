@@ -57,7 +57,7 @@ include 'koneksi.php'
     
     $ambil = "SELECT * FROM data_mhs WHERE NIM='$NIM', array(), array( 'Scrollable' => SQLSRV_CURSOR_KEYSET )";
     $query=sqlsrv_query($conn, $ambil) or die(sqlsrv_errors());
-    if (sqlsrv_num_rows($query)===false) {
+    if (sqlsrv_num_rows($query)==1) {
      echo "<script>alert('Gagal: NIM sudah ada');</script>";
      echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
     } else {
