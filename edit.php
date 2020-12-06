@@ -67,7 +67,7 @@ $data=sqlsrv_fetch_array($query);
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
 
-    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$_GET[id]'";
+    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TanggalBulanTahun='$TBT' WHERE ID_datamhs='$_GET[id]'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
       
      echo "<script>alert('Data berhasil diedit!');</script>";
