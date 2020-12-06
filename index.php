@@ -41,13 +41,13 @@ include 'koneksi.php';
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
       <td>
         <a href="edit.php?id=<?php echo $data['ID']; ?>" style="float: left;">Edit</a> 
-        <a href="" style="float: center;">|</a> 
         <a href="hapus.php?id=<?php echo $data['ID']; ?>" style="float: right;" onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
       </td>
      </tr>
     <?php } ?>
    </tbody>
   </table>
+    <a href="https://github.com/eby8zevin/uas-aplikasimobile7" target="_blank">Source Code</a>
  </div>
 </body>
 </html>
