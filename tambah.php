@@ -16,16 +16,16 @@ include 'koneksi.php'
    <form method="POST" >
     <tr>
      <td>NIM :</td>
-     <td><input type="number" name="NIM" id="NIM"></td>
+     <td><input type="number" name="NIM" id="NIM" required></td>
     </tr>
     <tr>
      <td>Nama :</td>
-     <td><input type="text" name="Nama" id="Nama"></td>
+     <td><input type="text" name="Nama" id="Nama" required></td>
     </tr>
     <tr>
      <td>Program Studi :</td>
      <td>
-      <select name="Prodi" id="Prodi">
+      <select name="Prodi" id="Prodi" required>
        <option disabled="" selected="">-Pilih-</option>
        <option value="Teknik Informatika">Teknik Informatika</option>
        <option value="Manajemen Informatika">Manajemen Informatika</option>
@@ -34,7 +34,7 @@ include 'koneksi.php'
     </tr>
     <tr>
      <td>Tanggal Bulan Tahun :</td>
-     <td><input type="text" name="TBT" id="TBT" placeholder="DD-MM-YYYY"></td>
+     <td><input type="text" name="TBT" id="TBT" placeholder="DD-MM-YYYY" required></td>
     </tr>
     <tr>
      <td></td>
