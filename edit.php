@@ -20,6 +20,10 @@ $data=sqlsrv_fetch_array($query);
 <body>
  <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
+   <table>
+    <form method="POST">
+    </form>
+   </table>
  </div>
 
   <?php
