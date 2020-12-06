@@ -56,7 +56,7 @@ include 'koneksi.php'
     $TBT=$_POST['TBT'];
     
     $ambil = "SELECT * FROM data_mhs WHERE NIM='$NIM'";
-    $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+    $query=sqlsrv_query($conn, $ambil) or die(sqlsrv_errors());
     if (sqlsrv_fetch_array($query)==1) {
      echo "<script>alert('Gagal: NIM sudah ada');</script>";
      echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
