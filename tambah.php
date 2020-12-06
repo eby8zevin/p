@@ -16,7 +16,7 @@ include 'koneksi.php'
    <form method="POST" >
     <tr>
      <td>NIM :</td>
-     <td><input type="text" name="NIM" id="NIM"></td>
+     <td><input type="number" name="NIM" id="NIM"></td>
     </tr>
     <tr>
      <td>Nama :</td>
