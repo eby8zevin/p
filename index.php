@@ -28,7 +28,7 @@ include 'koneksi.php';
     <?php
      $sql="SELECT * FROM data_mhs";
      $no=1;
-     //eksekusi query menampilkan data dari tabel Mhsw
+     //eksekusi query menampilkan data dari tabel data_mhs
      $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());;
      //mengembalikan data row menjadi array dan looping data menggunakan while
      while ($data=sqlsrv_fetch_array($query)) {
