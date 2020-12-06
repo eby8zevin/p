@@ -56,7 +56,7 @@ include 'koneksi.php'
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
     
-    $sql="INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')";
+    $sql="INSERT INTO data_mhs (ID, NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('null', '$NIM', '$Nama', '$Prodi', '$TBT')";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
