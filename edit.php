@@ -3,9 +3,9 @@ include 'koneksi.php';
 
 //ambil data id dari parameter
 //data ID data_mhs berasal dari select berdasarkan id
-$ID=$_GET['id'];
+//$ID=$_GET['id'];
 //select data dari tabel data_mhs berdasarkan id
-$sql="SELECT * FROM data_mhs WHERE ID_datamhs='$ID'";
+$sql="SELECT * FROM data_mhs WHERE ID_datamhs='$_GET[id]'";
    
 $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
 $data=sqlsrv_fetch_array($query);  
@@ -67,7 +67,7 @@ $data=sqlsrv_fetch_array($query);
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
 
-    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID'";
+    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$_GET[id]'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
       
      echo "<script>alert('Data berhasil diedit!');</script>";
