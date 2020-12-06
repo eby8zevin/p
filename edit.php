@@ -69,14 +69,10 @@ $data=sqlsrv_fetch_array($query);
 
     $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-    if ($query) {
-     //redirect ke halaman index
+      
      echo "<script>alert('Data berhasil diedit!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=sukses'>";
-    } else {
-     echo "<script>alert('Data gagal diedit!');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=gagal'>";
-    }
+    
    }
   ?>
  
