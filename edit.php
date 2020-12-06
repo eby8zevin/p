@@ -30,6 +30,17 @@ $data=sqlsrv_fetch_array($query);
       <td>Nama :</td>
       <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama']; ?>"></td>
      </tr>
+     <tr>
+      <td>Program Studi :</td>
+      <td>
+       <select name="Prodi" id="Prodi">
+        <option disabled="" selected="">-Pilih-</option>
+<!-- cek apakah data dari database sama dengan value option, jika sama maka tambah atribute selected -->
+        <option <?php if($data['Prodi']=="Teknik Informatika") echo "selected"; ?> value="Teknik Informatika">Teknik Informatika</option>
+        <option <?php if($data['Prodi']=="Manajemen Informatika") echo "selected"; ?> value="Manajemen Informatika">Manajemen Informatika</option>
+       </select>
+      </td>
+     </tr>
     </form>
    </table>
  </div>
