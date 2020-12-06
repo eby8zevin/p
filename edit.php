@@ -24,16 +24,16 @@ $data=sqlsrv_fetch_array($query);
     <form method="POST">
      <tr>
       <td>NIM :</td>
-      <td><input type="number" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>"></td>
+      <td><input type="number" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>" disabled></td>
      </tr>
      <tr>
       <td>Nama :</td>
-      <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama']; ?>"></td>
+      <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama']; ?>" required></td>
      </tr>
      <tr>
       <td>Program Studi :</td>
       <td>
-       <select name="Prodi" id="Prodi">
+       <select name="Prodi" id="Prodi" required>
         <option disabled="" selected="">-Pilih-</option>
 <!-- cek apakah data dari database sama dengan value option, jika sama maka tambah atribute selected -->
         <option <?php if($data['Prodi']=="Teknik Informatika") echo "selected"; ?> value="Teknik Informatika">Teknik Informatika</option>
@@ -43,7 +43,7 @@ $data=sqlsrv_fetch_array($query);
      </tr>
      <tr>
       <td>Tanggal Bulan Tahun :</td>
-      <td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>"></td>
+      <td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>" required></td>
      </tr>
      <tr>
       <td></td>
@@ -71,13 +71,13 @@ $data=sqlsrv_fetch_array($query);
     $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TanggalBulanTahun='$TBT' WHERE ID_datamhs='$ID_datamhs'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     
-    if (sqlsrv_fetch_array($query)==1) {
-     echo "<script>alert('Data gagal diedit! NIM sudah ada.');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=edit.php?datadiedit=gagal'>";
-    } else {
+    if ($query) {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil diedit!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=sukses'>";
+    } else {
+     echo "<script>alert('Data gagal diedit!');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=edit.php?datadiedit=gagal'>";
     }
    }
   sqlsrv_close( $conn );
