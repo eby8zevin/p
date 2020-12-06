@@ -24,7 +24,7 @@ $data=sqlsrv_fetch_array($query);
     <form method="POST">
      <tr>
       <td>NIM :</td>
-      <td><input type="number" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>" disabled></td>
+      <td><input type="number" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>" readonly></td>
      </tr>
      <tr>
       <td>Nama :</td>
