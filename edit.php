@@ -70,11 +70,17 @@ $data=sqlsrv_fetch_array($query);
 
     $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TanggalBulanTahun='$TBT' WHERE ID_datamhs='$ID_datamhs'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
-      
+    
+    if (sqlsrv_fetch_array($query)==1) {
+     echo "<script>alert('Data gagal diedit! NIM sudah ada.');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=edit.php?datadiedit=gagal'>";
+    } else {
+     //redirect ke halaman index
      echo "<script>alert('Data berhasil diedit!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=sukses'>";
-    
+    }
    }
+  sqlsrv_close( $conn );
   ?>
  
 </body>
