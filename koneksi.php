@@ -13,5 +13,10 @@ if( $conn ) {
      die( print_r( sqlsrv_errors(), true));
 }
 
+//-------------------------------------
+// Perform database operations here.
+//-------------------------------------
+
+// Close the connection.
 //sqlsrv_close( $conn );
 ?>
