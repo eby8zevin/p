@@ -10,6 +10,9 @@ include 'koneksi.php';
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+ <div align="center">
+  <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
+ </div
 
 </body>
 </html>
