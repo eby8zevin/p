@@ -40,8 +40,7 @@ include 'koneksi.php';
       <td><?php echo $data['Jurusan']; ?></td>
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
       <td>
-       <a href="edit.php">Edit</a> |
-       <a href="hapus.php">Hapus</a> 
+       <a href="edit.php">Edit</a> 
       </td>
      </tr>
     <?php } ?>
