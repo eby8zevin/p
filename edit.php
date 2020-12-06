@@ -12,6 +12,7 @@ include 'koneksi.php'
 <body>
  <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
+  
   <?php
    //ambil data id dari parameter
    $ID=$_GET['ID'];
@@ -21,6 +22,7 @@ include 'koneksi.php'
    $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
    $data=sqlsrv_fetch_array($query);
   ?>
+  
   <table >
    <form method="POST" >
     <tr>
@@ -28,11 +30,11 @@ include 'koneksi.php'
      <td><input type="text" name="NIM" id="NIM" value="<?php echo $data['NIM'] ?>"></td>
     </tr>
     <tr>
-     <td>Nama</td>
+     <td>Nama :</td>
      <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama'] ?>"></td>
     </tr>
     <tr>
-     <td>Prodi</td>
+     <td>Program Studi :</td>
      <td>
 
       <select name="Prodi" id="Prodi">
@@ -45,7 +47,7 @@ include 'koneksi.php'
      </td>
     </tr>
     <tr>
-     <td>Tanggal Bulan Tahun</td>
+     <td>Tanggal Bulan Tahun :</td>
      <<td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun'] ?>"></td>
     </tr>
     <tr>
@@ -57,6 +59,7 @@ include 'koneksi.php'
     </tr>
    </form>
   </table>
+ 
   <?php
    //eksekusi simpan data
    if (isset($_POST['edit'])) {
