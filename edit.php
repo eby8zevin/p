@@ -64,7 +64,7 @@ include 'koneksi.php';
    if (isset($_POST['edit'])) {
     # code...
     //data ID data_mhs berasal dari select berdasarkan id
-    $ID=$data['ID_datamhs'];
+    $ID_datamhs=$data['ID_datamhs'];
 
     //data dari form
     $NIM=$_POST['NIM'];
@@ -72,7 +72,7 @@ include 'koneksi.php';
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
 
-    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID'";
+    $sql="UPDATE data_mhs SET NIM='$NIM', Nama='$Nama', Prodi='$Prodi', TBT='$TBT' WHERE ID_datamhs='$ID_datamhs'";
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
