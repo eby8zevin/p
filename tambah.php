@@ -15,15 +15,15 @@ include 'koneksi.php'
   <table >
    <form method="POST" >
     <tr>
-     <td>NIM</td>
-     <td>:<input type="text" name="NIM" id="NIM"></td>
+     <td>NIM :</td>
+     <td><input type="text" name="NIM" id="NIM"></td>
     </tr>
     <tr>
      <td>Nama :</td>
      <td><input type="text" name="Nama" id="Nama"></td>
     </tr>
     <tr>
-     <td>Prodi</td>
+     <td>Program Studi :</td>
      <td>
       <select name="Prodi" id="Prodi">
        <option disabled="" selected="">-Pilih-</option>
@@ -34,8 +34,8 @@ include 'koneksi.php'
      </td>
     </tr>
     <tr>
-     <td>Tanggal Bulan Tahun</td>
-     <td><input type="text" name="TBT" id="TBT" placeholder="DD-MM-YYYY">:</td>
+     <td>Tanggal Bulan Tahun :</td>
+     <td><input type="text" name="TBT" id="TBT" placeholder="DD-MM-YYYY"></td>
     </tr>
     <tr>
      <td></td>
