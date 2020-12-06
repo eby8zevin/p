@@ -23,15 +23,15 @@ include 'koneksi.php'
    $data=sqlsrv_fetch_array($query);
   ?>
   
-  <table >
+  <table>
    <form method="POST" >
     <tr>
      <td>NIM :</td>
-     <td><input type="text" name="NIM" id="NIM" value="<?php echo $data['NIM'] ?>"></td>
+     <td><input type="text" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>"></td>
     </tr>
     <tr>
      <td>Nama :</td>
-     <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama'] ?>"></td>
+     <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama']; ?>"></td>
     </tr>
     <tr>
      <td>Program Studi :</td>
@@ -42,13 +42,12 @@ include 'koneksi.php'
        <!-- cek apakah data dari database sama dengan value option, jika sama maka tambah atribute selected -->
        <option <?php if($data['Prodi']=="Teknik Informatika") echo "selected"; ?> value="Teknik Informatika">Teknik Informatika</option>
        <option <?php if($data['Prodi']=="Manajemen Informatika") echo "selected"; ?> value="Manajemen Informatika">Manajemen Informatika</option>
-       <option <?php if($data['Prodi']=="Sistem Informasi") echo "selected"; ?> value="Sistem Informasi">Sistem Informasi</option>
       </select>
      </td>
     </tr>
     <tr>
      <td>Tanggal Bulan Tahun :</td>
-     <<td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun'] ?>"></td>
+     <<td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>"></td>
     </tr>
     <tr>
      <td></td>
