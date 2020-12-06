@@ -40,8 +40,8 @@ include 'koneksi.php';
       <td><?php echo $data['Jurusan']; ?></td>
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
       <td>
-       <a href="edit.php?id=<?php echo $data['ID']; ?>">Edit</a> |
-       <a href="hapus.php?id=<?php echo $data['ID']; ?>"  onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a> 
+       <a href="edit.php">Edit</a> |
+       <a href="hapus.php">Hapus</a> 
       </td>
      </tr>
     <?php } ?>
