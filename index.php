@@ -13,6 +13,7 @@ include 'koneksi.php';
   <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>jancukers.com</h3>
   <a href="tambah.php">Tambah Data</a>
+    <br>
   <table border="1" width="700px">
    <thead>
     <tr>
@@ -47,6 +48,7 @@ include 'koneksi.php';
     <?php } ?>
    </tbody>
   </table>
+    <br>
     <a href="https://github.com/eby8zevin/uas-aplikasimobile7" target="_blank">Source Code</a>
  </div>
 </body>
