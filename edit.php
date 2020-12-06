@@ -15,9 +15,9 @@ include 'koneksi.php';
   
    <?php
    //ambil data id dari parameter
-   $ID=$_GET['ID'];
+   $IDm=$_GET['ID'];
    //select data dari tabel data_mhs berdasarkan id
-   $sql="SELECT * FROM data_mhs WHERE ID='$ID'";
+   $sql="SELECT * FROM data_mhs WHERE ID='$IDm'";
    
    $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
    $data=sqlsrv_fetch_array($query);
@@ -64,7 +64,7 @@ include 'koneksi.php';
    if (isset($_POST['edit'])) {
     # code...
     //data ID data_mhs berasal dari select berdasarkan id
-    $ID=$data['ID'];
+    $ID=$data['IDm'];
 
     //data dari form
     $NIM=$_POST['NIM'];
