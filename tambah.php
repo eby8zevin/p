@@ -59,8 +59,8 @@ include 'koneksi.php'
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
-     echo "<script>alert('Data berhasil di tambahkan!');history.go(-1);</script>";
-     header("Location:index.php");
+     echo "<script>alert('Data berhasil di tambahkan!');</script>";
+     header('Location:index.php');
     }
    }
   ?>
