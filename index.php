@@ -39,8 +39,9 @@ include 'koneksi.php';
       <td><?php echo $data['Nama']; ?></td>
       <td><?php echo $data['Prodi']; ?></td>
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
-      <td style="float: center;">
-        <a href="edit.php?id=<?php echo $data['ID']; ?>" style="float: left;">Edit</a> |
+      <td>
+        <a href="edit.php?id=<?php echo $data['ID']; ?>" style="float: left;">Edit</a> 
+        <a href="" style="float: center;">|</a> 
         <a href="hapus.php?id=<?php echo $data['ID']; ?>" style="float: right;" onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
       </td>
      </tr>
