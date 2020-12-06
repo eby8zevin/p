@@ -41,6 +41,10 @@ $data=sqlsrv_fetch_array($query);
        </select>
       </td>
      </tr>
+     <tr>
+      <td>Tanggal Bulan Tahun :</td>
+      <td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>"></td>
+     </tr>
     </form>
    </table>
  </div>
