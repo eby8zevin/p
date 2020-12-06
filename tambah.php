@@ -60,7 +60,7 @@ include 'koneksi.php'
     if ($query) {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');</script>";
-     header('Location:index.php');
+     echo "<meta http-equiv='refresh' content='0;url=index.php?datatersimpan=sukses'>";
     }
    }
   ?>
