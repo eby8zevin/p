@@ -35,13 +35,11 @@ include 'koneksi.php';
     ?>
      <tr>
       <td><?php echo $no++; ?></td>
-       <td><?php echo $data['NIM']; ?></td>
+      <td><?php echo $data['NIM']; ?></td>
       <td><?php echo $data['Nama']; ?></td>
       <td><?php echo $data['Jurusan']; ?></td>
       <td><?php echo $data['TanggalBulanTahun']; ?></td>
-      <td>
-       <a href="edit.php">Edit</a> 
-      </td>
+      <td>Edit</td>
      </tr>
     <?php } ?>
    </tbody>
