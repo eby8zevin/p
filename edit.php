@@ -22,6 +22,14 @@ $data=sqlsrv_fetch_array($query);
   <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
    <table>
     <form method="POST">
+     <tr>
+      <td>NIM :</td>
+      <td><input type="number" name="NIM" id="NIM" value="<?php echo $data['NIM']; ?>"></td>
+     </tr>
+     <tr>
+      <td>Nama :</td>
+      <td><input type="text" name="Nama" id="Nama" value="<?php echo $data['Nama']; ?>"></td>
+     </tr>
     </form>
    </table>
  </div>
