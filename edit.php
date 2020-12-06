@@ -13,7 +13,7 @@ include 'koneksi.php'
  <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
   
-  <?php
+   <?php
    //ambil data id dari parameter
    $ID=$_GET['ID'];
    //select data dari tabel data_mhs berdasarkan id
@@ -84,6 +84,7 @@ include 'koneksi.php'
     }
    }
   ?>
+ 
  </div>
 </body>
 </html>
