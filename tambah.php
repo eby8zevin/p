@@ -12,8 +12,8 @@ include 'koneksi.php'
 <body>
  <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>Form Tambah Data</h3>
-  <table >
-   <form method="POST" >
+  <table>
+   <form method="POST">
     <tr>
      <td>NIM :</td>
      <td><input type="number" name="NIM" id="NIM" required></td>
