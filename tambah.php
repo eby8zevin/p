@@ -60,7 +60,7 @@ include 'koneksi.php'
     if ($query) {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');history.go(-1);</script>";
-     //header("Location:index.php");
+     header("Location:index.php");
     }
    }
   ?>
