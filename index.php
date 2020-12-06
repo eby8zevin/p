@@ -12,8 +12,7 @@ include 'koneksi.php';
 <body>
   <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>jancukers.com</h3>
-  <a href="tambah.php">Tambah Data</a>
-    <br>
+    <p><a href="tambah.php">Tambah Data</a></p>
   <table border="1" width="700px">
    <thead>
     <tr>
