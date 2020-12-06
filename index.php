@@ -35,11 +35,14 @@ include 'koneksi.php';
     ?>
      <tr>
       <td><?php echo $no++; ?></td>
-      <td>NIM</td>
-      <td>Nama</td>
-      <td>Jurusan</td>
-      <td>Tanggal</td>
-      <td>More</td>
+      <td><?php echo $data['NIM']; ?></td>
+      <td><?php echo $data['Nama']; ?></td>
+      <td><?php echo $data['Prodi']; ?></td>
+      <td><?php echo $data['TanggalBulanTahun']; ?></td>
+      <td>
+        <a href="edit.php?id=<?php echo $data['ID']; ?>">Edit</a>
+        <a href="hapus.php?id=<?php echo $data['ID']; ?>"  onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
+      </td>
      </tr>
     <?php } ?>
    </tbody>
