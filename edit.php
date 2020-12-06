@@ -74,8 +74,11 @@ include 'koneksi.php'
     $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
     if ($query) {
      //redirect ke halaman index
-     echo "<script>alert('Data berhasil diedit!');history.go(-1);</script>";
-     //header("Location:index.php");
+     echo "<script>alert('Data berhasil diedit!');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=sukses'>";
+    } else {
+     echo "<script>alert('Data gagal diedit!');</script>";
+     echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=gagal'>";
     }
    }
   ?>
