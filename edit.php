@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php'
+include 'koneksi.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,15 @@ include 'koneksi.php'
  <div align="center">
   <h3>Simpan Data SQL Server dengan PHP<br>Form Edit Data</h3>
   
+   <?php
+   //ambil data id dari parameter
+   $ID=$_GET['ID'];
+   //select data dari tabel data_mhs berdasarkan id
+   $sql="SELECT * FROM data_mhs WHERE ID='$ID'";
    
+   $query=sqlsrv_query($conn,$sql) or die(sqlsrv_errors());
+   $data=sqlsrv_fetch_array($query);
+  ?>
   
   <table>
    <form method="POST">
