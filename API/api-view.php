@@ -27,8 +27,6 @@ include 'koneksi.php';
 
 
 //pdo
-include 'koneksi.php';
-
 $response = [];
 
 $query = $pdo->prepare("SELECT * FROM data_mhs ORDER BY NIM ASC");
