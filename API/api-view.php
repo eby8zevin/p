@@ -1,5 +1,5 @@
 <?php
-include '.../API/koneksi.php';
+include 'koneksi.php';
 
 //syntax melihat semua record data yang ada di tabel data_mhs
 $sql = "SELECT * FROM data_mhs";
@@ -9,6 +9,7 @@ $query = sqlsrv_query($conn, $sql);
 while($data=sqlsrv_fetch_array($query)){
   $item[] = array (
     'ID_datamhs' => $data['ID_datamhs'],
+    'NIM' => $data['NIM'],
 //     'Nama' => $data['Nama'],
 //     'Program Studi' => $data['Prodi'],
 //     'Tanggal Bulan Tahun' => $data['TanggalBulanTahun']
