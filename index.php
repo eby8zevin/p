@@ -38,7 +38,10 @@ include 'koneksi.php';
       <td><?php echo $data['NIM']; ?></td>
       <td><?php echo $data['Nama']; ?></td>
       <td><?php echo $data['Prodi']; ?></td>
-      <td><?php echo $data['TanggalBulanTahun']; ?></td>
+      <td>
+        <?php $source = $data['TanggalBulanTahun'];
+        				$date = new DateTime($source);
+        				echo $date->format('d - m - Y');?>
       <td>
         <a href="edit.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: left;">Edit</a> 
         <a href="hapus.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: right;" onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
