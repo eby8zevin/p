@@ -55,7 +55,7 @@ include 'koneksi.php';
   </table>
     <br>
     <a href="https://github.com/eby8zevin/uas-aplikasimobile7" target="_blank">Source Code</a> 
-    <a href=".../API/api-view.php" target="_blank">API</a>
+    <a href="/API/api-view.php" target="_blank">API</a>
  </div>
 </body>
 </html>
