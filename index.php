@@ -44,7 +44,7 @@ include 'koneksi.php';
       <td>
         <?php $source = $data['TanggalBulanTahun'];
         				$date = new DateTime($source);
-        				echo $date->format('d - m - Y');?>
+        				echo $date->format('d - M - Y');?>
       <td>
         <a href="edit.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: left;">Edit</a> 
         <a href="hapus.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: right;" onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
