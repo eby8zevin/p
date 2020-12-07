@@ -43,7 +43,7 @@ $data=sqlsrv_fetch_array($query);
      </tr>
      <tr>
       <td>Tanggal Bulan Tahun :</td>
-      <td><input type="text" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>" required></td>
+      <td><input type="date" name="TBT" id="TBT" value="<?php echo $data['TanggalBulanTahun']; ?>" required></td>
      </tr>
      <tr>
       <td></td>
