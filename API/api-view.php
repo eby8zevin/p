@@ -29,7 +29,7 @@ include 'koneksi.php';
 //pdo
 $response = [];
 
-$query = $pdo->prepare("SELECT * FROM data_mhs ORDER BY NIM ASC");
+$query = $conn->prepare("SELECT * FROM data_mhs ORDER BY NIM ASC");
 $query->execute();
 
 if ($query->rowCount() == 0) {
