@@ -10,9 +10,9 @@ while($data=sqlsrv_fetch_array($query)){
   $item[] = array (
     'ID_datamhs' => $data['ID_datamhs'],
     'NIM' => $data['NIM'],
-//     'Nama' => $data['Nama'],
-//     'Program Studi' => $data['Prodi'],
-//     'Tanggal Bulan Tahun' => $data['TanggalBulanTahun']
+    'Nama' => $data['Nama'],
+    'Program_Studi' => $data['Prodi'],
+    'Tanggal_Bulan_Tahun' => $data['TanggalBulanTahun']
   );
 }
 
