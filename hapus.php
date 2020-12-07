@@ -11,9 +11,6 @@
   //redirect ke halaman index
   echo "<script>alert('Data berhasil dihapus!');</script>";
   echo "<meta http-equiv='refresh' content='0;url=index.php?datadihapus=sukses'>";
- } else {
-  echo "<script>alert('Data gagal dihapus!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=index.php?datadihapus=gagal'>";
  }
 
 sqlsrv_close( $conn );
