@@ -14,7 +14,7 @@ include 'koneksi.php';
   <h3>Simpan Data SQL Server dengan PHP<br>jancukers.com</h3>
     <?php
       date_default_timezone_set('Asia/Jakarta');
-      echo date('d-m-Y H:i:s'); ?>
+      echo date('d F Y H:i:s'); ?>
     <p><a href="tambah.php">Tambah Data</a></p>
   <table border="1" width="700px">
    <thead>
@@ -44,7 +44,7 @@ include 'koneksi.php';
       <td>
         <?php $source = $data['TanggalBulanTahun'];
         				$date = new DateTime($source);
-        				echo $date->format('d - M - Y');?>
+        				echo $date->format('d - m - Y');?>
       <td>
         <a href="edit.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: left;">Edit</a> 
         <a href="hapus.php?id=<?php echo $data['ID_datamhs']; ?>" style="float: right;" onClick="javascript: return confirm('Apakah anda yakin?');">Hapus</a>
