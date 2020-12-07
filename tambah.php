@@ -34,7 +34,7 @@ include 'koneksi.php'
     </tr>
     <tr>
      <td>Tanggal Bulan Tahun :</td>
-     <td><input type="text" name="TBT" id="TBT" placeholder="DD-MM-YYYY" required></td>
+     <td><input type="date" name="TBT" id="TBT" placeholder="DD-MM-YYYY" required></td>
     </tr>
     <tr>
      <td></td>
@@ -55,14 +55,10 @@ include 'koneksi.php'
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
     
-    $ambil = "SELECT * FROM data_mhs WHERE NIM='$_POST[NIM]'";   
-    $query=sqlsrv_query($conn, $ambil) or die(sqlsrv_errors());
+    $sql = "INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')";  
+    $query = sqlsrv_query($conn, $sql) or die(sqlsrv_errors());
     
-    if (sqlsrv_num_rows($query)<0) {
-     echo "<script>alert('Gagal: NIM sudah ada.');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=tambah.php?datadisimpan=gagal'>";
-    } else {
-     sqlsrv_query($conn, "INSERT INTO data_mhs (NIM, Nama, Prodi, TanggalBulanTahun) VALUES ('$NIM', '$Nama', '$Prodi', '$TBT')");
+    if ($query) {
      //redirect ke halaman index
      echo "<script>alert('Data berhasil di tambahkan!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadisimpan=sukses'>";
