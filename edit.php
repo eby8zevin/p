@@ -62,6 +62,7 @@ $data=sqlsrv_fetch_array($query);
     # code...
     //data ID data_mhs berasal dari select berdasarkan id
     $ID_datamhs=$data['ID_datamhs'];
+
     //data dari form
     $NIM=$_POST['NIM'];
     $Nama=$_POST['Nama'];
@@ -75,9 +76,6 @@ $data=sqlsrv_fetch_array($query);
      //redirect ke halaman index
      echo "<script>alert('Data berhasil diedit!');</script>";
      echo "<meta http-equiv='refresh' content='0;url=index.php?datadiedit=sukses'>";
-    } else {
-     echo "<script>alert('Data gagal diedit!');</script>";
-     echo "<meta http-equiv='refresh' content='0;url=edit.php?datadiedit=gagal'>";
     }
    }
   sqlsrv_close( $conn );
