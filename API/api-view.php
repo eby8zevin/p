@@ -5,13 +5,13 @@ include 'koneksi.php';
 $sql = "SELECT * FROM data_mhs";
 
 //eksekusi query diatas
-$query = sqlsrv_query($sql);
+$query = sqlsrv_query($conn, $sql);
 while($data=sqlsrv_fetch_array($query)){
   $item[] = array (
     'ID_datamhs' => $data['ID_datamhs'],
-    'Nama' => $data['Nama'],
-    'Program Studi' => $data['Prodi'],
-    'Tanggal Bulan Tahun' => $data['TanggalBulanTahun']
+//     'Nama' => $data['Nama'],
+//     'Program Studi' => $data['Prodi'],
+//     'Tanggal Bulan Tahun' => $data['TanggalBulanTahun']
   );
 }
 
