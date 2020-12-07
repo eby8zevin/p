@@ -55,7 +55,7 @@ include 'koneksi.php'
     $Prodi=$_POST['Prodi'];
     $TBT=$_POST['TBT'];
     
-    $ambil = "SELECT COUNT(*) FROM data_mhs WHERE NIM='$_POST[NIM]'";   
+    $ambil = "SELECT * FROM data_mhs WHERE NIM='$_POST[NIM]'";   
     $query=sqlsrv_query($conn, $ambil) or die(sqlsrv_errors());
     
     if (sqlsrv_num_rows($query)<0) {
