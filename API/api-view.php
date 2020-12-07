@@ -5,8 +5,8 @@ include 'koneksi.php';
 $sql = "SELECT * FROM data_mhs";
 
 //eksekusi query diatas
-$query = mysqli_query($sql);
-while($data=mysqli_fetch_array($query)){
+$query = sqlsrv_query($sql);
+while($data=sqlsrv_fetch_array($query)){
   $item[] = array (
     'ID_datamhs' => $data['ID_datamhs'],
     'Nama' => $data['Nama'],
