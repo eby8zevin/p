@@ -1,5 +1,5 @@
 <?php
-include 'koneksi.php';
+include '.../API/koneksi.php';
 
 //syntax melihat semua record data yang ada di tabel data_mhs
 $sql = "SELECT * FROM data_mhs";
