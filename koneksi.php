@@ -22,14 +22,14 @@
 
 
 // PHP Data Objects(PDO) Sample Code:
-// try {
-//     $conn = new PDO("sqlsrv:server = tcp:stmik-yadika-bangil.database.windows.net,1433; Database = uas-aplikasimobile7-db", "stmikyadikabangil", "{your_password_here}");
-//     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// }
-// catch (PDOException $e) {
-//     print("Error connecting to SQL Server.");
-//     die(print_r($e));
-// }
+try {
+    $pdo = new PDO("sqlsrv:server = tcp:stmik-yadika-bangil.database.windows.net,1433; Database = uas-aplikasimobile7-db", "stmikyadikabangil", "{your_password_here}");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}
+catch (PDOException $e) {
+    print("Error connecting to SQL Server.");
+    die(print_r($e));
+}
 
 // SQL Server Extension Sample Code:
 $connectionInfo = array("UID" => "stmikyadikabangil", "pwd" => "!5tm1ky4d1k4b4n91l#", "Database" => "uas-aplikasimobile7-db", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
