@@ -11,8 +11,8 @@ while($data=sqlsrv_fetch_array($query)){
     'ID_datamhs' => $data['ID_datamhs'],
     'NIM' => $data['NIM'],
     'Nama' => $data['Nama'],
-    'Program_Studi' => $data['Prodi'],
-    'Tanggal_Bulan_Tahun' => $data['TanggalBulanTahun']
+    'Prodi' => $data['Prodi'],
+    'TanggalBulanTahun' => $data['TanggalBulanTahun']
   );
 }
 
