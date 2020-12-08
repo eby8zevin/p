@@ -1,11 +1,11 @@
 <?php 
 	include "koneksi.php";
 	
-	$query = mysqli_query("SELECT * FROM data_mhs");
+	$query = sqlsrv_query($conn, "SELECT * FROM data_mhs");
 	
 	$json = array();
 	
-	while($row = mysqli_fetch_assoc($query)){
+	while($row = sqlsrv_fetch_array($query)){
 		$json[] = $row;
 	}
 	
