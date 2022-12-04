@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/bg_button.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/bitmap_background.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/border.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_a_button_outlined_fullwidth_icon_leading.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_a_pulang.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_absen_datang.xml" value="0.1355" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_absen_ijin.xml" value="0.1355" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_absen_kedatangan.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_absen_pulang.xml" value="0.114" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_back_hp.xml" value="0.1065" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.123" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_baseline_book_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_baseline_date_range.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_baseline_menu_book_24.xml" value="0.1085" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_btn_lanjut_new.xml" value="0.1065" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_bts_waktu_5_menit.xml" value="0.2115" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_clock.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_edit_pen.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_info_outline_black_24dp.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_masukkan_kode_pesantren_anda.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_mengucap_bismillah.xml" value="0.15" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_notifications_active_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_outline_cloud_upload_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_outline_contact_mail_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/ic_outline_how_to_reg_24.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/rounded_rectangle.xml" value="0.123" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/drawable/state_bnve.xml" value="0.147" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_edit_profile.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_home_page.xml" value="0.10450819672131148" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_ijin.xml" value="0.1723419041000695" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_kehadiran_tahunan.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_login_ponpes.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_mata_pelajaran.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_time_picker_fragment.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/activity_upload_image.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/after_absen.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/dialog.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/fragment_home.xml" value="0.31742738589211617" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/fragment_laporan.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/item_list_kehadiran.xml" value="0.2" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/layout_header.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/my_location_demo.xml" value="0.2" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/layout/option_jenis_ijin.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/menu/bottom_menu_home.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Develop AS Presensi/app/src/main/res/menu/options.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/bg_green_gradient.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_a_button_bckhp.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_a_button_konfirmasi_lokasi.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_a_button_outlined_fullwidth_icon_leading.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_a_imageasset_headerbackground.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_baseline_access_alarm.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_btn_lanjut_new.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/ic_btn_masuk_new.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/rounded_rectangle.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/drawable/state_bnve.xml" value="0.1365" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_home_page.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_ijin.xml" value="0.20797720797720798" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_kehadiran_tahunan.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_login_ponpes.xml" value="0.18" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/activity_upload_image.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/after_absen.xml" value="0.1" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/bottom_sheet_detail_kehadiran.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/item_list_kehadiran.xml" value="0.22" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/layout_header.xml" value="0.25" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/layout/my_location_demo.xml" value="0.1287568306010929" />
+        <entry key="..\:/Users/NUR AIDA HASANAH/OneDrive/Documents/GitHub/Indoweb/Develop eLazis Presensi/app/src/main/res/menu/bottom_menu_home.xml" value="0.13470790378006872" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

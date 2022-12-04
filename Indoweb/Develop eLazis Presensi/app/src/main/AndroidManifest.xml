@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="id.indoweb.elazis.presensi">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="true" />
+
+    <application
+        android:name="id.indoweb.elazis.presensi.utils.App"
+        android:allowBackup="true"
+        android:icon="@drawable/elazis"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/elazis"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity android:name="id.indoweb.elazis.presensi.ui.EditProfileActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.uploadingpdf.UploadMainActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.pdfactivity.PdfActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.uploadpdfaditya.UploadActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.laporan.LaporanWeb" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.izin.IjinActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.laporan.KehadiranTahunanActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.absen.AfterAbsen" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.absen.UploadImage" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.absen.MyLocationActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.MainActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.LoginActivity" />
+        <activity android:name="id.indoweb.elazis.presensi.ui.LoginPonpesActivity" />
+        <activity
+            android:name="id.indoweb.elazis.presensi.ui.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>
