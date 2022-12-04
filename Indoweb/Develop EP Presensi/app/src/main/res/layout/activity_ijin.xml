@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green_pesantren_2"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/btn_bck_hp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_back_hp"/>
+
+        <TextView
+            android:id="@+id/info_hdr_ijin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pengajuan Izin"
+            android:textAppearance="@style/page_title"
+            android:textAlignment="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="35dp"
+            android:paddingRight="35dp"
+            android:paddingTop="10dp">
+
+            <LinearLayout
+                android:layout_marginBottom="26dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textSize="12sp"
+                    android:text="Pilih Jenis Izin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioGroup
+                    android:id="@+id/radio_group"
+                    android:checkedButton="@+id/cuti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        style="@style/Widget.App.RadioButton"
+                        android:id="@+id/cuti"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Cuti"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        style="@style/Widget.App.RadioButton"
+                        android:id="@+id/sakit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Sakit"/>
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        style="@style/Widget.App.RadioButton"
+                        android:id="@+id/lain"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Keperluan Lain"/>
+                </RadioGroup>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/jenis"
+                    android:visibility="invisible"
+                    android:text="CUTI"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/input_tgl_awal"
+                    android:visibility="invisible"
+                    android:text=""/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/input_tgl_akhir"
+                    android:visibility="invisible"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_tgl"
+                    android:inputType="none"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
+                    android:hint="Pilih Tanggal"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--  Keterangan Label -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="15dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/input_keterangan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Keterangan" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:alpha="0.9"
+                android:background="@color/green_pesantren"
+                android:gravity="center"
+                android:text="Kirim"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

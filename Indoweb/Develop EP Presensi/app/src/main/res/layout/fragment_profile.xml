@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <ImageView
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintBottom_toBottomOf="@id/layout_atas1"
+           android:id="@+id/foto_blur"
+           android:src="@color/black"
+           android:scaleType="fitXY"
+           android:layout_width="match_parent"
+           android:layout_height="0dp" />
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           app:layout_constraintTop_toTopOf="parent"
+           android:id="@+id/layout_atas1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+
+           <de.hdodenhof.circleimageview.CircleImageView
+               android:id="@+id/profile_image"
+               android:layout_width="96dp"
+               android:layout_height="96dp"
+               android:layout_alignParentTop="true"
+               android:layout_centerHorizontal="true"
+               android:layout_gravity="center_horizontal"
+               android:layout_marginTop="72dp"
+               android:src="@drawable/user2"
+               app:civ_border_color="#fff"
+               app:civ_border_width="2dp"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.498"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent" />
+
+           <TextView
+               android:id="@+id/info_nama_user_2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="13dp"
+               android:paddingBottom="40dp"
+               android:text="Fragment Profile"
+               android:textAppearance="@style/mulya_lukma"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@id/profile_image"
+               android:textColor="@color/black"/>
+
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+       <ScrollView
+           app:layout_constraintTop_toBottomOf="@id/layout_atas1"
+           app:layout_constraintBottom_toBottomOf="parent"
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_below="@id/layout_atas1">
+
+           <LinearLayout
+               android:padding="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_marginBottom="26dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <TextView
+                       android:textSize="12sp"
+                       android:text="PESANTREN"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/pesantren"
+                       android:textSize="16sp"
+                       android:text="Ponpes Al-Hikmah Gresik"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginBottom="26dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <TextView
+                       android:textSize="12sp"
+                       android:text="JABATAN"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/jabatan"
+                       android:textSize="16sp"
+                       android:text="Admin Ponpes"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginBottom="26dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <TextView
+                       android:textSize="12sp"
+                       android:text="NIP"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/nip"
+                       android:textSize="16sp"
+                       android:text="P123123123213"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginBottom="26dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <TextView
+                       android:textSize="12sp"
+                       android:text="EMAIL"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/email"
+                       android:textSize="16sp"
+                       android:text="mulya.lazuardi@gmail.com"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_marginBottom="26dp"
+                   android:orientation="vertical"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content">
+
+                   <TextView
+                       android:textSize="12sp"
+                       android:text="NO. PONSEL"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:id="@+id/no_ponsel"
+                       android:textSize="16sp"
+                       android:text="+62 812 1236 1232"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:id="@+id/btn_logout"
+                   android:gravity="center"
+                   android:background="@drawable/bg_round_corner_gray"
+                   android:orientation="horizontal"
+                   android:layout_width="match_parent"
+                   android:layout_height="45dp">
+
+                   <ImageView
+                       android:src="@drawable/ic_baseline_logout_24"
+                       android:layout_width="wrap_content"
+                       android:layout_height="match_parent"
+                       app:tint="@color/redError" />
+
+                   <TextView
+                       android:layout_marginStart="10dp"
+                       android:layout_gravity="center_vertical"
+                       android:text="KELUAR AKUN"
+                       android:textColor="@color/redError"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+
+           </LinearLayout>
+
+       </ScrollView>
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        layout="@layout/bottom_sheet_logout"
+        android:id="@+id/bsLogout"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
