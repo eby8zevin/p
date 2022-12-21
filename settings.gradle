@@ -1,1 +1,4 @@
+include ':libs:httpclient-4.3.6.jar'
+include ':libs:httpcore-4.3.3.jar'
+include ':libs:httpmime-4.3.6.jar'
 include ':app'
