@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">AdminSekolah Presensi</string>
+
+    <string name="msg_loading">Loading. . .</string>
+    <!--    Permissions    -->
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Maps\'.</string>
+    <string name="permission_required_toast">Location permission is required for this App.</string>
+
+    <string name="tv_school_code">Masukkan Kode Sekolah Anda:</string>
+    <string name="school_code">Kode Sekolah</string>
+    <string name="delete_saved_data">Hapus Data Tersimpan</string>
+    <string name="version">Versi 1.2</string>
+
+    <string name="school_name">Admin Sekolah Demo</string>
+    <string name="nip">NIP</string>
+    <string name="password">Password</string>
+
+    <string name="home">Home</string>
+    <string name="presence">Presensi</string>
+    <string name="profile">Profil</string>
+
+    <string name="tv_username">Ardana Wirasakti</string>
+    <string name="tv_job">Admin Sekolah</string>
+    <string name="date_day">Minggu, 31 Desember 2021</string>
+    <string name="gmt">WIB</string>
+    <string name="COME">DATANG</string>
+    <string name="GO_HOME">PULANG</string>
+    <string name="tv_time_come">07:55</string>
+    <string name="tv_time_go_home">16:05</string>
+    <string name="report_web">Laporan Web</string>
+
+    <string name="tv_progress_value">60%</string>
+    <string name="tv_progress_day">14/24 Hari</string>
+    <string name="tv_progress_year">134/288 Hari</string>
+    <string name="present">Hadir</string>
+    <string name="tv_present_value">99 Hari</string>
+    <string name="late">Terlambat</string>
+    <string name="tv_late_value">30 Kali</string>
+    <string name="presence_year">Presensi Tahun Ini</string>
+    <string name="presence_recap">Rekap Presensi</string>
+    <string name="detail">Detail</string>
+    <string name="jam_datang">JAM DATANG</string>
+    <string name="jam_pulang">JAM PULANG</string>
+    <string name="time_smh">10:10:10</string>
+    <string name="catatan">CATATAN</string>
+    <string name="datang_pulang">Datang — Pulang</string>
+    <string name="rv_not_found">Mohon Maaf, Data Tidak Ditemukan!</string>
+
+    <string name="lokasi_datang">Lokasi Datang</string>
+    <string name="lokasi_pulang">Lokasi Pulang</string>
+    <string name="catatan_datang">Catatan Datang</string>
+    <string name="catatan_pulang">Catatan Pulang</string>
+
+    <string name="mapel">&#160;Mapel</string>
+    <string name="time_present">JAM ABSENSI</string>
+    <string name="time_lesson">JAM PELAJARAN</string>
+    <string name="location">LOKASI</string>
+    <string name="name_location">Kantor Pusat Sekolah</string>
+    <string name="name_lesson">NAMA PELAJARAN</string>
+    <string name="this_lesson">Bahasa Indonesia</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="kelas">Kelas</string>
+
+    <string name="present_in_year">Presensi Tahun&#160;</string>
+    <string name="month">Bulan</string>
+    <string name="mata_pelajaran">&#160;Mata Pelajaran</string>
+    <string name="total">Total&#160;</string>
+
+    <string name="school">SEKOLAH</string>
+    <string name="job">JABATAN</string>
+    <string name="nip_value">P123123123213</string>
+    <string name="email">EMAIL</string>
+    <string name="email_value">your.name@gmail.com</string>
+    <string name="no_hp">NO. PONSEL</string>
+    <string name="no_hp_value">+62 812 1236 1232</string>
+    <string name="logout_account">KELUAR AKUN</string>
+    <string name="save">Simpan</string>
+
+    <string name="come_present">Absen Datang</string>
+
+    <string name="message_limit">BATAS WAKTU ABSEN 60 DETIK, \nSETELAH ITU HALAMAN INI AKAN TERTUTUP OTOMATIS !</string>
+    <string name="space_gmt"> WIB</string>
+    <string name="tv_loc_user">Kediri, East Java, Indonesia</string>
+    <string name="take_photo">Ambil Foto !</string>
+    <string name="fill_notes">Harap Isi:</string>
+    <string name="note">Catatan</string>
+    <string name="send">KIRIM</string>
+    <string name="present_success">Absen Kedatangan Anda Berhasil Dikirim !</string>
+    <string name="start_pray">Selalu awali Pekerjaan Dengan Mengucap Bismillah</string>
+
+    <string name="perizinan">Pengajuan Perizinan</string>
+    <string name="choose_permit">Silahkan Pilih:</string>
+    <string name="permit">Ijin</string>
+    <string name="sick">Sakit</string>
+    <string name="other">Lain-Lain</string>
+    <string name="select_date">Pilih Tanggal</string>
+    <string name="doc_name">Nama Dokumen</string>
+    <string name="desc">Keterangan</string>
+    <string name="IJIN">IJIN</string>
+    <string name="SAKIT">SAKIT</string>
+    <string name="LAIN_LAIN">LAIN-LAIN</string>
+
+    <string name="name">Nama</string>
+    <string name="position">Jabatan</string>
+
+    <string name="select">Pilih</string>
+    <string name="school_unit">Unit Sekolah :</string>
+    <string name="school_class">Kelas :</string>
+    <string name="school_lesson">Mata Pelajaran :</string>
+    <string name="school_time">Jam : </string>
+
+</resources>
