@@ -44,5 +44,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-        name: app-release.apk
-        path: "$newApkName"
+        name: app
+        path: app/build/outputs/apk/debug/app-debug.apk
