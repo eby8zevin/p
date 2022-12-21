@@ -22,6 +22,6 @@ jobs:
     - name: install dos2unix
       run: sudo apt-get install dos2unix && git config core.autocrlf false
     - name: cd do2unix
-      run: cd android && dos2unix ./gradlew
+      run: dos2unix ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
