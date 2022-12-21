@@ -25,7 +25,9 @@ jobs:
       run: ./gradlew build
       
     - name: Create dir
-      run: mkdir -p app/build/outputs/apk/debug/
+      run: |
+        mkdir -p /app/build/outputs/apk/release/
+        mkdir -p /app/build/outputs/apk/debug/
 
     - name: Unit tests
       run: bash ./gradlew test --stacktrace
@@ -40,7 +42,7 @@ jobs:
         newApkName="$project$SEP$date.apk"
         mv app/build/outputs/apk/release/app-release.apk "$newApkName"
     - name: Upload APK
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: app-release.apk
         path: "$newApkName"
