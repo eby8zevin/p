@@ -25,16 +25,15 @@ jobs:
       run: ./gradlew build
 
     - name: Rename APK
-      working-directory: app/build/outputs/apk/release
       run: |
         project="absensi_adminsekolah"
         SEP="_"
         date=$(date '+%d.%m.%Y')
         newApkName="$project$SEP$date.apk"
-        mv app/build/outputs/apk/release/app-release.apk "$newApkName"
+        mv app/build/outputs/apk/debug/app-debug.apk "$newApkName"
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-        name: app-release.apk
+        name: app
         path: "$newApkName"
