@@ -31,8 +31,16 @@ jobs:
       run: bash ./gradlew test --stacktrace
     - name: Build debug APK
       run: bash ./gradlew assembleDebug --stacktrace
+      
+    - name: Rename APK
+      run: |
+        project="absensi_adminsekolah"
+        SEP="_"
+        date=$(date '+%d.%m.%Y')
+        newApkName="$project$SEP$date.apk"
+        mv app/build/outputs/apk/release/app-release.apk "$newApkName"
     - name: Upload APK
       uses: actions/upload-artifact@v1
       with:
-        name: app
-        path: app/build/outputs/apk/debug/app-debug.apk
+        name: app-release.apk
+        path: "$newApkName"
