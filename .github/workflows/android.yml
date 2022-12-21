@@ -24,10 +24,10 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       
-    - name: Create dir
-      run: |
-        mkdir -p /app/build/outputs/apk/release/
-        mkdir -p /app/build/outputs/apk/debug/
+#    - name: Create dir
+#      run: |
+#        mkdir -p /app/build/outputs/apk/release/
+#        mkdir -p /app/build/outputs/apk/debug/
 
     - name: Unit tests
       run: bash ./gradlew test --stacktrace
