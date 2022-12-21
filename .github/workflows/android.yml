@@ -24,7 +24,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
-  - name: Rename APK
+    - name: Rename APK
       run: |
         project="absensi_adminsekolah"
         SEP="_"
