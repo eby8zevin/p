@@ -12,6 +12,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/libs" />
+            <option value="$PROJECT_DIR$/libs/httpclient-4.3.6.jar" />
+            <option value="$PROJECT_DIR$/libs/httpcore-4.3.3.jar" />
+            <option value="$PROJECT_DIR$/libs/httpmime-4.3.6.jar" />
           </set>
         </option>
       </GradleProjectSettings>
