@@ -20,7 +20,7 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build
+      run: git config --global core.autocrlf false && ./gradlew build
 
     - name: Unit Tests
       run: bash ./gradlew test --stacktrace
