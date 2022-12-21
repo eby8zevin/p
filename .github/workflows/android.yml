@@ -30,9 +30,10 @@ jobs:
         SEP="_"
         date=$(date '+%d.%m.%Y')
         newApkName="$project$SEP$date.apk"
+        mv app-release.apk "$newApkName"
 
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
         name: app-release.apk
-        path: mv app/build/outputs/apk/release/app-release.apk "$newApkName"
+        path: app/build/outputs/apk/release/"$newApkName"
