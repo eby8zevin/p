@@ -34,13 +34,13 @@ jobs:
     - name: Build debug APK
       run: bash ./gradlew assembleDebug --stacktrace
       
-    - name: Rename APK
-      run: |
-        project="absensi_adminsekolah"
-        SEP="_"
-        date=$(date '+%d.%m.%Y')
-        newApkName="$project$SEP$date.apk"
-        mv app/build/outputs/apk/release/app-release.apk "$newApkName"
+#    - name: Rename APK
+#      run: |
+#        project="absensi_adminsekolah"
+#        SEP="_"
+#        date=$(date '+%d.%m.%Y')
+#        newApkName="$project$SEP$date.apk"
+#        mv app/build/outputs/apk/release/app-release.apk "$newApkName"
     - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
