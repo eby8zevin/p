@@ -17,25 +17,22 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Install dos2unix
-      run: sudo apt-get install dos2unix && dos2unix ./gradlew
+#    - name: Install dos2unix
+#      run: sudo apt-get install dos2unix && dos2unix ./gradlew
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
 
-    - name: Unit tests
-      run: bash ./gradlew test --stacktrace
-    - name: Build debug APK
-      run: bash ./gradlew assembleDebug --stacktrace
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v2
-      with:
-        name: app
-        run: |
+    - name: Rename APK
+      run: |
           project="absensi_adminsekolah"
           SEP="_"
           date=$(date '+%d.%m.%Y')
           newApkName="$project$SEP$date.apk"
-        path: app/build/outputs/apk/debug/"$newApkName"
+          mv app/build/outputs/apk/release/app-release.apk "$newApkName"
+    - name: Upload APK
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-release.apk
+        path: "$newApkName"
