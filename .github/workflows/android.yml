@@ -23,7 +23,7 @@ jobs:
     - name: Install Android NDK
       run: |
           mkdir -p $ANDROID_HOME/ndk-bundle
-          wget -O ndk.zip https://dl.google.com/android/repository/android-ndk-${23.1.7779620}-linux-x86_64.zip
+          wget -O ndk.zip https://dl.google.com/android/repository/android-ndk-23.1.7779620-linux-x86_64.zip
           unzip ndk.zip -d $ANDROID_HOME/ndk-bundle
           rm ndk.zip
 
