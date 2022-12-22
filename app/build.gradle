@@ -42,7 +42,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    /*applicationVariants.all { variant ->
+    applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def project = "absensi_adminsekolah"
             def SEP = "_"
@@ -51,7 +51,7 @@ android {
             def newApkName = project + SEP + formattedDate + ".apk"
             outputFileName = new File(newApkName)
         }
-    }*/
+    }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
