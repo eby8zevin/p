@@ -7,10 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/p.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/p.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/p.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/p.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/p.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/p.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/p.libs.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/p.libs.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/httpclient-4.3.6.jar/p.libs.httpclient-4.3.6.jar.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/httpclient-4.3.6.jar/p.libs.httpclient-4.3.6.jar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/httpcore-4.3.3.jar/p.libs.httpcore-4.3.3.jar.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/httpcore-4.3.3.jar/p.libs.httpcore-4.3.3.jar.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/libs/httpmime-4.3.6.jar/p.libs.httpmime-4.3.6.jar.iml" filepath="$PROJECT_DIR$/.idea/modules/libs/httpmime-4.3.6.jar/p.libs.httpmime-4.3.6.jar.iml" />
     </modules>
   </component>
 </project>
