@@ -36,4 +36,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: app
-        path: app/build/outputs/apk/debug/"$newApkName"
+        app/build/outputs/apk/debug/"$newApkName"
