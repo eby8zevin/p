@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_lesson"
+    app:startDestination="@id/homeLessonFragment">
+
+    <action
+        android:id="@+id/open_home_lesson"
+        app:destination="@+id/homeLessonFragment" />
+
+    <action
+        android:id="@+id/open_lesson_report"
+        app:destination="@id/lessonReportFragment" />
+
+    <action
+        android:id="@+id/open_profile_page"
+        app:destination="@id/profileFragment" />
+
+    <fragment
+        android:id="@+id/homeLessonFragment"
+        android:name="com.ekosp.indoweb.adminsekolah.ui.fragment.HomePelajaranFragment"
+        android:label="fragment_home_lesson"
+        tools:layout="@layout/fragment_home_pelajaran" />
+
+
+    <fragment
+        android:id="@+id/lessonReportFragment"
+        android:name="com.ekosp.indoweb.adminsekolah.ui.fragment.LaporanPelajaranFragment"
+        android:label="fragment_lesson_report"
+        tools:layout="@layout/fragment_laporan_pelajaran" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ekosp.indoweb.adminsekolah.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.absen.MyLocationActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <fragment
+            android:id="@+id/map"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="676dp"
+            android:layout_marginTop="56dp"
+            tools:ignore="FragmentTagUsage" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/ic_a_container_sheet_bottom">
+
+        <TextView
+            android:id="@+id/tv_map_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2sp"
+            android:text="@string/msg_loading"
+            android:textAppearance="@style/btm_txt_map"
+            android:textSize="17sp"
+            android:translationY="-1.21sp" />
+
+        <ImageView
+            android:id="@+id/btn_loc_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/ic_a_button_konfirmasi_lokasi"
+            tools:ignore="ContentDescription" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="@color/green_pesantren_2">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_back_hp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/info_toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/come_present"
+            android:textAlignment="center"
+            android:textAppearance="@style/page_title" />
+    </FrameLayout>
+
+</FrameLayout>
