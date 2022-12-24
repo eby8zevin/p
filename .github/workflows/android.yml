@@ -19,7 +19,27 @@ jobs:
 
       - name: Install dos2unix
         run: sudo apt-get install dos2unix
+        
+      - name: Set up NDK
+        uses: actions/setup-android@v1
+        with:
+          android-sdk: 'ndk-bundle'
+          ndk-version: '23.1.7779620'
+        
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
         run: ./gradlew build
+        
+      - name: Rename APK
+        run: |
+          project="absensi_adminsekolah"
+          SEP="_"
+          date=$(date '+%d.%m.%Y')
+          newApkName="${project}${SEP}${date}.apk"
+          mv app/build/outputs/apk/debug/app-debug.apk "$newApkName"
+        
+      - name: Exclude META-INF files from APK
+        run: echo "packagingOptions { exclude 'META-INF/DEPENDENCIES' exclude 'META-INF/LICENSE' exclude 'META-INF/LICENSE.txt' exclude 'META-INF/license.txt' exclude 'META-INF/NOTICE' exclude 'META-INF/NOTICE.txt' exclude 'META-INF/notice.txt' }" >> app/build.gradle
+        
+        
