@@ -20,6 +20,9 @@ jobs:
       - name: Install dos2unix
         run: sudo apt-get install dos2unix
         
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+        
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1.2.0
         with:
@@ -34,9 +37,6 @@ jobs:
         
       - name: Exclude META-INF files from APK
         run: echo "packagingOptions { exclude 'META-INF/DEPENDENCIES' exclude 'META-INF/LICENSE' exclude 'META-INF/LICENSE.txt' exclude 'META-INF/license.txt' exclude 'META-INF/NOTICE' exclude 'META-INF/NOTICE.txt' exclude 'META-INF/notice.txt' }" >> app/build.gradle
-        
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
         
       - name: Build debug APK
         run: |
