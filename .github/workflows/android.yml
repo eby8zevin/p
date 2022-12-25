@@ -23,11 +23,11 @@ jobs:
 #       - name: Setup Android SDK
 #         uses: android-actions/setup-android@v2
         
-      - name: Setup Android NDK
-        uses: nttld/setup-ndk@v1.2.0
-        with:
-          ndk-version: r25b
-          local-cache: true
+#      - name: Setup Android NDK
+#        uses: nttld/setup-ndk@v1.2.0
+#        with:
+#          ndk-version: r25b
+#          local-cache: true
                 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -42,9 +42,8 @@ jobs:
         run: bash ./gradlew test --stacktrace
       
       - name: Build debug APK
-        run: |
-            bash ./gradlew assembleDebug --stacktrace
-            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
+        run: bash ./gradlew assembleDebug --stacktrace
+#            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
         
       - name: Upload APK
         uses: actions/upload-artifact@v2
