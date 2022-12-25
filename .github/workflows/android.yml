@@ -30,9 +30,8 @@ jobs:
         run: bash ./gradlew test --stacktrace
         
       - name: Build debug APK
-        run: | 
-            bash ./gradlew assembleDebug --stacktrace
-            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
+        run: bash ./gradlew assembleDebug --stacktrace
+#            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
         
       - name: Upload APK
         uses: actions/upload-artifact@v2
