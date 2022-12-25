@@ -37,8 +37,9 @@ jobs:
        
       - name: Build debug APK
       - uses: actions/setup-android@v2
-      - run: gradle assembleDebug
-      - run: mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
+      - run: |
+            gradle assembleDebug
+            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
       
       - name: Upload APK
       - uses: actions/upload-artifact@v2
