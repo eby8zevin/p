@@ -18,7 +18,7 @@ jobs:
           cache: gradle
 
       - name: Install dos2unix
-        run: sudo apt-get install dos2unix
+        run: sudo apt-get install dos2unix && sudo find . -type f -exec dos2unix {} \;
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build with Gradle
