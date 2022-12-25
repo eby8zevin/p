@@ -9,53 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: set up JDK 11
-        uses: actions/setup-java@v3
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          cache: gradle
+    - uses: actions/checkout@v3
+    - name: set up JDK 11
+      uses: actions/setup-java@v3
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
 
-      - name: Install dos2unix
-        run: sudo apt-get install dos2unix
-                      
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-               
-      - name: Build with Gradle
-        run: ./gradlew clean build
-        
-      - name: Build APK
-        run: ./gradlew assembleDebug
-        
-      - name: Set up NDK
-        run: ndk-build
-        env:
-          ANDROID_NDK_HOME: ${{ runner.tool_cache }}/android-sdk/ndk-bundle
-      - name: Configure NDK
-        run: |
-          cd android
-          sed -i "s/ndk.dir=.*/ndk.dir=${ANDROID_NDK_HOME}/" local.properties
-          sed -i "s/ndk.dir=.*/ndk.dir=${ANDROID_NDK_HOME}/" gradle.properties
-      - name: Set up ABI filters
-        run: |
-          cd app
-          sed -i "s/abiFilters '.*'/abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'/" build.gradle
-      - name: Set up NDK version
-        run: |
-          cd app
-          sed -i "s/ndkVersion '.*'/ndkVersion '23.1.7779620'/" build.gradle
-        
-      - name: Unit tests
-        run: ./gradlew test
-        
-      - name: Build debug APK
-        run: ./gradlew assembleDebug
-#            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
-        
-      - name: Publish APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-debug.apk #absensi_adminsekolah.apk
-          path: app/build/outputs/apk/debug/app-debug.apk #absensi_adminsekolah_$(date +%d.%m.%Y).apk
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
