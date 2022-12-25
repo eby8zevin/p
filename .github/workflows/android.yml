@@ -20,8 +20,8 @@ jobs:
       - name: Install dos2unix
         run: sudo apt-get install dos2unix
         
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+#       - name: Setup Android SDK
+#         uses: android-actions/setup-android@v2
         
       - name: Setup Android NDK
         uses: nttld/setup-ndk@v1.2.0
@@ -39,9 +39,8 @@ jobs:
         run: echo "packagingOptions { exclude 'META-INF/DEPENDENCIES' exclude 'META-INF/LICENSE' exclude 'META-INF/LICENSE.txt' exclude 'META-INF/license.txt' exclude 'META-INF/NOTICE' exclude 'META-INF/NOTICE.txt' exclude 'META-INF/notice.txt' }" >> app/build.gradle
         
       - name: Build debug APK
-        run: |
-            ./gradlew assembleDebug --stacktrace
-            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
+        run: ./gradlew assembleDebug --stacktrace
+#            mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/absensi_adminsekolah_$(date +%d.%m.%Y).apk
         
       - name: Upload APK
         uses: actions/upload-artifact@v2
