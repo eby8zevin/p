@@ -34,14 +34,6 @@ jobs:
         
       - name: Exclude META-INF files from APK
         run: echo "packagingOptions { exclude 'META-INF/DEPENDENCIES' exclude 'META-INF/LICENSE' exclude 'META-INF/LICENSE.txt' exclude 'META-INF/license.txt' exclude 'META-INF/NOTICE' exclude 'META-INF/NOTICE.txt' exclude 'META-INF/notice.txt' }" >> app/build.gradle
-        
-      - name: Rename APK
-        run: |
-          project="absensi_adminsekolah"
-          SEP="_"
-          date=$(date '+%d.%m.%Y')
-          newApkName="$project$SEP$date.apk"
-          mv app/build/outputs/apk/debug/app-debug.apk "$newApkName"
           
       - uses: actions/upload-artifact@v2
         with:
