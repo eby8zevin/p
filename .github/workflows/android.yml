@@ -26,6 +26,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
         
+      - name: Build APK
+        run: ./gradlew assembleDebug
+        
       - name: Set up NDK
         run: ndk-build
         env:
