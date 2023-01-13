@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.karan.churi.PermissionManager.PermissionManager;
-import com.squareup.okhttp.MediaType;
 
 import java.util.Objects;
 
@@ -41,7 +40,7 @@ public class LoginPonpesActivity extends Activity {
 
     private static final String TAG = "LoginPonpesActivity";
     private PermissionManager permission;
-    MediaType JSON;
+
     private SessionManager session;
     private DataPonpes mDataPonpes;
     private ProgressDialog progressDialog;
@@ -61,7 +60,6 @@ public class LoginPonpesActivity extends Activity {
         };
         permission.checkAndRequestPermissions(this);
 
-        JSON = MediaType.parse("application/json; charset=utf-8");
         // Session Manager
         session = new SessionManager(this);
 
@@ -91,7 +89,6 @@ public class LoginPonpesActivity extends Activity {
     }
 
     private void checkLogin() {
-        Log.d(TAG, "Lanjut");
         hideKeyboard();
 
         String schoolCode = Objects.requireNonNull(binding.inputSchoolCode.getText()).toString();
@@ -114,24 +111,29 @@ public class LoginPonpesActivity extends Activity {
     private void checkServer(String schoolCode) {
         try {
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-            Call<DataPonpes> call = apiService.checkPonpes(schoolCode);
+            Call<DataPonpes> call = apiService.checkLembaga(schoolCode);
             call.enqueue(new Callback<DataPonpes>() {
                 @Override
                 public void onResponse(@NonNull Call<DataPonpes> call, @NonNull Response<DataPonpes> response) {
-                    if (response.isSuccessful()) {
-                        mDataPonpes = response.body();
+                    progressDialog.dismiss();
+                    binding.btnLogin.setEnabled(true);
+
+                    mDataPonpes = response.body();
+                    if (response.isSuccessful() && mDataPonpes != null) {
                         if (Objects.requireNonNull(mDataPonpes).getCorrect()) {
                             onLoginSuccess(mDataPonpes);
                         } else {
-                            onLoginFailed(mDataPonpes.getMessage());
+                            StyleableToast.makeText(LoginPonpesActivity.this, mDataPonpes.getMessage(), Toast.LENGTH_LONG, R.style.mytoast_danger).show();
                         }
-                    } else
-                        StyleableToast.makeText(LoginPonpesActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
+                    }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<DataPonpes> call, @NonNull Throwable t) {
                     Log.e(TAG, "onFailure: " + t.getMessage());
+                    progressDialog.dismiss();
+                    binding.btnLogin.setEnabled(true);
+                    StyleableToast.makeText(LoginPonpesActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
                 }
             });
         } catch (Exception e) {
@@ -140,8 +142,6 @@ public class LoginPonpesActivity extends Activity {
     }
 
     private void onLoginSuccess(DataPonpes dp) {
-        binding.btnLogin.setEnabled(true);
-        progressDialog.dismiss();
         // save in sessionManager
         session.createLanjutSession(dp);
 
@@ -149,12 +149,6 @@ public class LoginPonpesActivity extends Activity {
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-    }
-
-    private void onLoginFailed(String loginFailed) {
-        StyleableToast.makeText(this, loginFailed, Toast.LENGTH_LONG, R.style.mytoast_danger).show();
-        binding.btnLogin.setEnabled(true);
-        progressDialog.dismiss();
     }
 
     private void isThisAppLatestVersion(String latestAppVersion) {
@@ -188,13 +182,12 @@ public class LoginPonpesActivity extends Activity {
                 if (response.isSuccessful()) {
                     latestAppVersion = Objects.requireNonNull(response.body()).getData().getVersionName();
                     isThisAppLatestVersion(latestAppVersion);
-                } else
-                    StyleableToast.makeText(LoginPonpesActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<AndroidVersionResponse> call, @NonNull Throwable t) {
-                Log.d("RETROFIT", "failed to fetch data from API" + t);
+                Log.d(TAG, "onFailure: " + t);
             }
         });
     }

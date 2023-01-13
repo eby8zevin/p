@@ -2,7 +2,6 @@
     <string name="app_name">eLazis Presensi</string>
 
     <string name="msg_loading">Loading. . .</string>
-    <string name="pick_file">Pick file</string>
     <!--    Permissions    -->
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
     <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
@@ -29,22 +28,23 @@
     <string name="GO_HOME">PULANG</string>
     <string name="tv_time_come">07:55</string>
     <string name="tv_time_go_home">16:05</string>
-    <string name="salary">Gaji</string>
-    <string name="report_web">Laporan Web</string>
+
 
     <string name="tv_progress_value">60%</string>
     <string name="tv_progress_day">14/24 Hari</string>
     <string name="present">Hadir</string>
     <string name="tv_present_value">99</string>
-    <string name="permit_leave">Izin &amp; Cuti</string>
-    <string name="alpha">Alpha</string>
+    <string name="permit_leave">Ijin &amp; Sakit</string>
     <string name="late">Terlambat</string>
     <string name="tv_late_value">30 mnt</string>
     <string name="presence_year">Presensi Tahun Ini</string>
     <string name="presence_recap">Rekap Presensi</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="datang_pulang">Datang — Pulang</string>
+    <string name="rv_not_found">Mohon Maaf, Data Tidak Ditemukan!</string>
     <string name="detail">Detail</string>
 
-    <string name="school">eLAZIS</string>
+    <string name="school">LEMBAGA</string>
     <string name="job">JABATAN</string>
     <string name="nip_value">P123123123213</string>
     <string name="email">EMAIL</string>
@@ -55,7 +55,7 @@
 
     <string name="come_present">Absen Datang</string>
 
-    <string name="message_limit">Batas waktu Absen 30 Detik, \nsetelah itu Halaman ini akan tertutup Otomatis</string>
+    <string name="message_limit">Batas waktu Absen 60 Detik, \nsetelah itu Halaman ini akan tertutup Otomatis</string>
     <string name="space_gmt"> WIB</string>
     <string name="tv_loc_user">Kediri, East Java, Indonesia</string>
     <string name="take_photo">Ambil Foto !</string>
@@ -67,18 +67,15 @@
 
     <string name="permit">Pengajuan Izin</string>
     <string name="choose_permit">Pilih Jenis Izin</string>
-    <string name="leave">Cuti</string>
+    <string name="leave">Ijin</string>
     <string name="sick">Sakit</string>
-    <string name="other">Keperluan Lain</string>
+    <string name="other">Lain-lain</string>
     <string name="select_date">Pilih Tanggal</string>
     <string name="doc_name">Nama Dokumen</string>
     <string name="desc">Keterangan</string>
-    <string name="CUTI">CUTI</string>
+    <string name="CUTI">IJIN</string>
     <string name="SAKIT">SAKIT</string>
-    <string name="KEPERLUAN_LAIN">KEPERLUAN LAIN</string>
-
-    <string name="name">Nama</string>
-    <string name="position">Jabatan</string>
+    <string name="LAIN_LAIN">LAIN-LAIN</string>
 
     <string name="kehadiran_tahun_ini">Kehadiran Tahun Ini</string>
     <string name="year">2021</string>

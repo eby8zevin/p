@@ -8,10 +8,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.screen.portrait" />
     <uses-feature
         android:name="android.hardware.location.gps"
         android:required="true" />
@@ -29,10 +33,6 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity android:name="id.indoweb.elazis.presensi.ui.EditProfileActivity" />
-        <activity android:name="id.indoweb.elazis.presensi.uploadingpdf.UploadMainActivity" />
-        <activity android:name="id.indoweb.elazis.presensi.pdfactivity.PdfActivity" />
-        <activity android:name="id.indoweb.elazis.presensi.uploadpdfaditya.UploadActivity" />
-        <activity android:name="id.indoweb.elazis.presensi.ui.laporan.LaporanWeb" />
         <activity android:name="id.indoweb.elazis.presensi.ui.izin.IjinActivity" />
         <activity android:name="id.indoweb.elazis.presensi.ui.laporan.KehadiranTahunanActivity" />
         <activity android:name="id.indoweb.elazis.presensi.ui.absen.AfterAbsen" />

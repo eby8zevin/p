@@ -1,7 +1,5 @@
 package id.indoweb.elazis.presensi.model;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -15,21 +13,21 @@ public class DataPonpes {
     @Expose
     private String message;
 
-    @SerializedName("nama_pesantren")
+    @SerializedName("kode_lembaga")
+    @Expose
+    private String kode_sekolah;
+
+    @SerializedName("nama_lembaga")
     @Expose
     private String nama_pesantren;
 
-    @SerializedName("alamat_pesantren")
+    @SerializedName("alamat_lembaga")
     @Expose
     private String alamat_pesantren;
 
     @SerializedName("domain")
     @Expose
     private String domain;
-
-    @SerializedName("kode_sekolah")
-    @Expose
-    private String kode_sekolah;
 
     @SerializedName("logo")
     @Expose
@@ -104,20 +102,5 @@ public class DataPonpes {
 
     public void setwaktu_indonesia(String waktu_indonesia) {
         this.waktu_indonesia = waktu_indonesia;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "DataPonpes{" +
-                "isCorrect=" + isCorrect +
-                ", message='" + message + '\'' +
-                ", nama_pesantren='" + nama_pesantren + '\'' +
-                ", alamat_pesantren='" + alamat_pesantren + '\'' +
-                ", domain='" + domain + '\'' +
-                ", kode_sekolah='" + kode_sekolah + '\'' +
-                ", logo='" + logo + '\'' +
-                ", waktu_indonesia='" + waktu_indonesia + '\'' +
-                '}';
     }
 }

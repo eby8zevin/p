@@ -1,7 +1,5 @@
 package id.indoweb.elazis.presensi.model;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -45,14 +43,5 @@ public class Area {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
-    }
-
-    @NonNull
-    public String toString() {
-        return "Area{" +
-                "lokasi='" + lokasi + '\'' +
-                ", longitude='" + longitude + '\'' +
-                ", latitude='" + latitude + '\'' +
-                '}';
     }
 }

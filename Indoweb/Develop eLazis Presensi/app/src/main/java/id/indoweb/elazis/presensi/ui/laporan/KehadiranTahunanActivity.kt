@@ -61,8 +61,7 @@ class KehadiranTahunanActivity : AppCompatActivity() {
                             res.percentase,
                             res.percentase_hari,
                             res.hadir,
-                            res.izin_cuti,
-                            res.alpa,
+                            res.izin_sakit,
                             res.terlambat
                         )
                     } else {
@@ -88,7 +87,6 @@ class KehadiranTahunanActivity : AppCompatActivity() {
         dayPercentage: String,
         present: String,
         permitLeave: String,
-        alpha: Int,
         late: String
     ) {
         binding.year.text = selectYear
@@ -105,13 +103,9 @@ class KehadiranTahunanActivity : AppCompatActivity() {
             append(permitLeave)
             append(" Hari")
         }
-        binding.tvAlpha.text = buildString {
-            append(alpha)
-            append(" Hari")
-        }
         binding.tvLate.text = buildString {
             append(late)
-            append(" Jam")
+            append(" Hari")
         }
     }
 }

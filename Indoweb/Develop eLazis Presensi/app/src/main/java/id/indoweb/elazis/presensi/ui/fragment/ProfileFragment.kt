@@ -19,7 +19,6 @@ import id.indoweb.elazis.presensi.databinding.FragmentProfileBinding
 import id.indoweb.elazis.presensi.helper.SessionManager
 import id.indoweb.elazis.presensi.model.DataPonpes
 import id.indoweb.elazis.presensi.model.DataUser
-import id.indoweb.elazis.presensi.ui.EditProfileActivity
 import id.indoweb.elazis.presensi.ui.LoginPonpesActivity
 import id.indoweb.elazis.presensi.ui.MainActivity
 import io.github.muddz.styleabletoast.StyleableToast
@@ -54,7 +53,7 @@ class ProfileFragment : Fragment() {
 
         getSession()
         setUI()
-        binding?.editProfile?.setOnClickListener { editProfile() }
+
         binding?.btnLogout?.setOnClickListener { clickLogout() }
         bindingBS?.btnBatal?.setOnClickListener { logoutCancel() }
         bindingBS?.btnKeluar?.setOnClickListener { logoutYes() }
@@ -64,17 +63,6 @@ class ProfileFragment : Fragment() {
         session = SessionManager(requireContext())
         dataUser = session.sessionDataUser
         dataPonpes = session.sessionDataPonpes
-    }
-
-    private fun editProfile() {
-        val i = Intent(activity, EditProfileActivity::class.java)
-        i.putExtra("PHOTO", dataUser.photo)
-        i.putExtra("NAME", dataUser.nama)
-        i.putExtra("POSITION", dataUser.jabatan)
-        i.putExtra("NIP", dataUser.nip)
-        i.putExtra("EMAIL", dataUser.email)
-        i.putExtra("NO_HP", dataUser.phone)
-        startActivity(i)
     }
 
     private fun setUI() {

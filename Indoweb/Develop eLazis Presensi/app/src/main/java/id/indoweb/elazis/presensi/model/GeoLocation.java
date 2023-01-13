@@ -3,12 +3,6 @@ package id.indoweb.elazis.presensi.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by Eko Setyo Purnomo on 06-Apr-18.
- * Find me on https://ekosp.com
- * Or email me directly to ekosetyopurnomo@gmail.com
- */
-
 public class GeoLocation implements Parcelable{
 
     private String address;

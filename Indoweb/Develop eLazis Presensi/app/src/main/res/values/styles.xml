@@ -63,7 +63,7 @@
         <item name="stStrokeWidth">3dp</item>
         <item name="stStrokeColor">#fff</item>
         <item name="stLength">SHORT</item>
-        <item name="stGravity">top</item>
+        <item name="stGravity">center</item>
         <item name="stRadius">5dp</item>
     </style>
 
@@ -76,7 +76,7 @@
         <item name="stStrokeWidth">3dp</item>
         <item name="stStrokeColor">#fff</item>
         <item name="stLength">SHORT</item>
-        <item name="stGravity">top</item>
+        <item name="stGravity">center</item>
         <item name="stRadius">5dp</item>
     </style>
 

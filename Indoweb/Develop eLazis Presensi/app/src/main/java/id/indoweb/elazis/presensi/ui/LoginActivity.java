@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.bumptech.glide.Glide;
+import com.karan.churi.PermissionManager.PermissionManager;
+
+import java.util.Objects;
 
 import id.indoweb.elazis.presensi.R;
 import id.indoweb.elazis.presensi.databinding.ActivityLoginBinding;
@@ -23,12 +26,6 @@ import id.indoweb.elazis.presensi.helper.SessionManager;
 import id.indoweb.elazis.presensi.model.AndroidVersionResponse;
 import id.indoweb.elazis.presensi.model.DataPonpes;
 import id.indoweb.elazis.presensi.model.DataUser;
-
-import com.karan.churi.PermissionManager.PermissionManager;
-import com.squareup.okhttp.MediaType;
-
-import java.util.Objects;
-
 import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,15 +39,14 @@ public class LoginActivity extends Activity {
 
     private static final String TAG = "LoginActivity";
     private PermissionManager permission;
-    MediaType JSON;
+    private ProgressDialog progressDialog;
+
     private SessionManager session;
     private DataPonpes mDataPonpes;
     private DataUser mDataUser;
-    private ProgressDialog progressDialog;
     private String latestAppVersion = "";
     private String thisAppVersion = "";
 
-    String password;
     private ActivityLoginBinding binding;
     LoginPonpesActivity getMethod = new LoginPonpesActivity();
 
@@ -60,11 +56,11 @@ public class LoginActivity extends Activity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getMethod.hideKeyboard();
         permission = new PermissionManager() {
         };
         permission.checkAndRequestPermissions(this);
 
-        JSON = MediaType.parse("application/json; charset=utf-8");
         // Session Manager
         session = new SessionManager(this);
 
@@ -76,7 +72,7 @@ public class LoginActivity extends Activity {
         mDataPonpes = session.getSessionDataPonpes();
 
         Glide.with(getApplicationContext())
-                .load("http://" + mDataPonpes.getLogo() + "")
+                .load(mDataPonpes.getLogo())
                 .error(R.drawable.elazis)
                 .into(binding.imgLogo);
         binding.tvSchoolName.setText(mDataPonpes.getNamaPonpes());
@@ -111,11 +107,9 @@ public class LoginActivity extends Activity {
     }
 
     private void checkLogin() {
-        Log.d(TAG, "Login");
-
         String schoolCode = mDataPonpes.getKodes();
         String nip = Objects.requireNonNull(binding.inputNip.getText()).toString();
-        password = Objects.requireNonNull(binding.inputPassword.getText()).toString();
+        String password = Objects.requireNonNull(binding.inputPassword.getText()).toString();
         session.savePwd(password);
 
         if (nip.isEmpty()) {
@@ -140,26 +134,32 @@ public class LoginActivity extends Activity {
     }
 
     private void checkServer(String schoolCode, String nip, String password) {
+        getMethod.hideKeyboard();
         try {
             ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             Call<DataUser> call = apiService.checkLogin(schoolCode, nip, password);
             call.enqueue(new Callback<DataUser>() {
                 @Override
                 public void onResponse(@NonNull Call<DataUser> call, @NonNull Response<DataUser> response) {
+                    progressDialog.dismiss();
+                    binding.btnLogin.setEnabled(true);
+
+                    mDataUser = response.body();
                     if (response.isSuccessful()) {
-                        mDataUser = response.body();
                         if (Objects.requireNonNull(mDataUser).getCorrect()) {
                             onLoginSuccess(mDataUser);
                         } else {
-                            onLoginFailed(mDataUser.getMessage());
+                            StyleableToast.makeText(LoginActivity.this, mDataPonpes.getMessage(), Toast.LENGTH_LONG, R.style.mytoast_danger).show();
                         }
-                    } else
-                        StyleableToast.makeText(LoginActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
+                    }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<DataUser> call, @NonNull Throwable t) {
                     Log.e(TAG, "onFailure: " + t);
+                    progressDialog.dismiss();
+                    binding.btnLogin.setEnabled(true);
+                    StyleableToast.makeText(LoginActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
                 }
             });
         } catch (Exception e) {
@@ -168,8 +168,6 @@ public class LoginActivity extends Activity {
     }
 
     private void onLoginSuccess(DataUser du) {
-        binding.btnLogin.setEnabled(true);
-        progressDialog.dismiss();
         // save in sessionManager
         session.createLoginSession(du);
 
@@ -177,13 +175,6 @@ public class LoginActivity extends Activity {
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
-    }
-
-    private void onLoginFailed(String loginFailed) {
-        StyleableToast.makeText(this, loginFailed, Toast.LENGTH_LONG, R.style.mytoast_danger).show();
-        binding.btnLogin.setEnabled(true);
-        progressDialog.dismiss();
-        getMethod.hideKeyboard();
     }
 
     private void isThisAppLatestVersion(String latestAppVersion) {
@@ -217,13 +208,12 @@ public class LoginActivity extends Activity {
                 if (response.isSuccessful()) {
                     latestAppVersion = Objects.requireNonNull(response.body()).getData().getVersionName();
                     isThisAppLatestVersion(latestAppVersion);
-                } else
-                    StyleableToast.makeText(LoginActivity.this, "Terjadi Gangguan Koneksi Ke Server", Toast.LENGTH_SHORT, R.style.mytoast_danger).show();
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<AndroidVersionResponse> call, @NonNull Throwable t) {
-                Log.d("RETROFIT", "failed to fetch data from API" + t);
+                Log.d(TAG, "onFailure: " + t);
             }
         });
     }

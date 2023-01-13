@@ -6,15 +6,12 @@ import android.os.Bundle;
 
 import id.indoweb.elazis.presensi.R;
 import id.indoweb.elazis.presensi.databinding.AfterAbsenBinding;
-import id.indoweb.elazis.presensi.ui.MainActivity;
-
 import id.indoweb.elazis.presensi.helper.GlobalVar;
-import id.indoweb.elazis.presensi.helper.SessionManager;
+import id.indoweb.elazis.presensi.ui.MainActivity;
 
 public class AfterAbsen extends Activity {
 
     private String TYPE;
-    SessionManager session;
     private AfterAbsenBinding binding;
 
     @Override
@@ -23,12 +20,10 @@ public class AfterAbsen extends Activity {
         binding = AfterAbsenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        session = new SessionManager(this);
-
         Intent intent = getIntent();
         if (intent != null) TYPE = intent.getStringExtra(GlobalVar.PARAM_TYPE_ABSENSI);
 
-        binding.tvPresentSuccess.setText(String.format("Absen %s Anda Berhasil Dikirim !", TYPE));
+        binding.tvPresentSuccess.setText(TYPE);
         binding.btnBack.setOnClickListener(v -> back());
     }
 

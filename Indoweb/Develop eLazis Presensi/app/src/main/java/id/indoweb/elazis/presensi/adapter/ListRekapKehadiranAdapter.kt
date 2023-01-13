@@ -74,19 +74,19 @@ class ListRekapKehadiranAdapter(
                     R.color.colorPrimaryDark
                 )
             )
-            "Sakit" -> holder.binding.tvDetail.setTextColor(
+            "Ijin" -> holder.binding.tvDetail.setTextColor(
                 ContextCompat.getColor(
                     context,
                     R.color.red
                 )
             )
-            "Cuti" -> holder.binding.tvDetail.setTextColor(
+            "Sakit" -> holder.binding.tvDetail.setTextColor(
                 ContextCompat.getColor(
                     context,
                     R.color.lime_dark
                 )
             )
-            "Keperluan Lain" -> holder.binding.tvDetail.setTextColor(
+            "Lain-lain" -> holder.binding.tvDetail.setTextColor(
                 ContextCompat.getColor(
                     context,
                     R.color.black

@@ -11,18 +11,15 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.Toast;
 
 import id.indoweb.elazis.presensi.R;
-
 import id.indoweb.elazis.presensi.helper.SessionManager;
-import io.github.muddz.styleabletoast.StyleableToast;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashScreen extends Activity {
 
     // Splash screen timer
-    private static final int SPLASH_TIME_OUT = 1000;
+    private static final int SPLASH_TIME_OUT = 2000;
     private SessionManager session;
 
     @Override
@@ -30,17 +27,26 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        session = new SessionManager(this);
+
         /*
          * Showing splash screen with a timer. This will be useful when you
          * want to show case your app logo / company
          */
         new Handler().postDelayed(() -> {
-            // This method will be executed once the timer is over
-            // Start your app main activity
-            Intent i = new Intent(SplashScreen.this, LoginPonpesActivity.class);
-            startActivity(i);
+            boolean isLogin = session.isLoggedIn();
+            Intent i;
+            if (isLogin) {
+                i = new Intent(SplashScreen.this, MainActivity.class);
+            } else {
+                // This method will be executed once the timer is over
+                // Start your app main activity
+                i = new Intent(SplashScreen.this, LoginPonpesActivity.class);
 
-            // close this activity
+                // close this activity
+            }
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
             finish();
         }, SPLASH_TIME_OUT);
     }

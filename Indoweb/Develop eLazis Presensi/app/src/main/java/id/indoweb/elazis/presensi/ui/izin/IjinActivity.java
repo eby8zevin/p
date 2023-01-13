@@ -3,6 +3,7 @@ package id.indoweb.elazis.presensi.ui.izin;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,21 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.util.Pair;
 
-import id.indoweb.elazis.presensi.R;
-import id.indoweb.elazis.presensi.databinding.ActivityIjinBinding;
-import id.indoweb.elazis.presensi.helper.ApiClient;
-import id.indoweb.elazis.presensi.helper.ApiInterface;
-import id.indoweb.elazis.presensi.helper.GlobalVar;
-import id.indoweb.elazis.presensi.helper.SessionManager;
-import id.indoweb.elazis.presensi.model.DataIjin;
-import id.indoweb.elazis.presensi.model.DataPonpes;
-import id.indoweb.elazis.presensi.model.LocationModel;
-import id.indoweb.elazis.presensi.ui.MainActivity;
-
 import com.google.android.material.datepicker.MaterialDatePicker;
-
 import com.karan.churi.PermissionManager.PermissionManager;
-import com.squareup.okhttp.MediaType;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +29,13 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
+import id.indoweb.elazis.presensi.R;
+import id.indoweb.elazis.presensi.databinding.ActivityIjinBinding;
+import id.indoweb.elazis.presensi.helper.ApiClient;
+import id.indoweb.elazis.presensi.helper.ApiInterface;
+import id.indoweb.elazis.presensi.helper.GlobalVar;
+import id.indoweb.elazis.presensi.model.DataIjin;
+import id.indoweb.elazis.presensi.ui.MainActivity;
 import io.github.muddz.styleabletoast.StyleableToast;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,15 +48,9 @@ public class IjinActivity extends AppCompatActivity {
     }
 
     private static final String TAG = "IjinActivity";
-    private static final int REQUEST_IJIN = 0;
+
     private ProgressDialog progressDialog;
     private PermissionManager permission;
-    MediaType JSON;
-    SessionManager session;
-    LocationModel lastLocation;
-    ApiInterface apiService;
-    DataPonpes mDataPonpes;
-    private DataIjin permit;
     private String codeSchool;
     private String username;
 
@@ -69,26 +58,19 @@ public class IjinActivity extends AppCompatActivity {
     private ActivityIjinBinding binding;
     private final Locale localeID = new Locale("in", "ID");
 
+    @SuppressLint("SourceLockedOrientationActivity")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityIjinBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         permission = new PermissionManager() {
         };
         permission.checkAndRequestPermissions(this);
 
-        JSON = MediaType.parse("application/json; charset=utf-8");
-        // Session Manager
-        session = new SessionManager(this);
-        mDataPonpes = session.getSessionDataPonpes();
-        permit = new DataIjin();
-
         Intent intent = getIntent();
-        if (intent.getParcelableExtra(GlobalVar.PARAM_LAST_LOCATION) != null)
-            lastLocation = intent.getParcelableExtra(GlobalVar.PARAM_LAST_LOCATION);
-
         if (intent.getStringExtra(GlobalVar.PARAM_KODES_USER) != null) {
             codeSchool = intent.getStringExtra(GlobalVar.PARAM_KODES_USER);
         }
@@ -97,14 +79,12 @@ public class IjinActivity extends AppCompatActivity {
         }
 
         binding.radioGroup.setOnCheckedChangeListener((radioGroup, id) -> {
-            if (id == R.id.cuti) {
+            if (id == R.id.ijin) {
                 binding.inputType.setText(R.string.CUTI);
             } else if (id == R.id.sakit) {
                 binding.inputType.setText(R.string.SAKIT);
             } else if (id == R.id.lain) {
-                binding.inputType.setText(R.string.KEPERLUAN_LAIN);
-            } else {
-                binding.inputType.setText("");
+                binding.inputType.setText(R.string.LAIN_LAIN);
             }
         });
 
@@ -137,13 +117,6 @@ public class IjinActivity extends AppCompatActivity {
         binding.btnBack.setOnClickListener(v -> back());
         binding.uploadFile.setOnClickListener(v -> uploadFile());
         binding.btnSubmit.setOnClickListener(v -> checkData());
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "IjinActivity{" +
-                "isCorrect=" + permit.getCorrect() + '}';
     }
 
     public void back() {
@@ -185,7 +158,7 @@ public class IjinActivity extends AppCompatActivity {
 
     private void saveToServer(String schoolCode, String idEmployee, String type, String dateStart, String dateEnd, String desc) {
         try {
-            apiService = ApiClient.getClient().create(ApiInterface.class);
+            ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
             Call<DataIjin> call = apiService.submitIjincoba(schoolCode, idEmployee, type, dateStart, dateEnd, desc);
             call.enqueue(new Callback<DataIjin>() {
                 @Override
@@ -198,13 +171,15 @@ public class IjinActivity extends AppCompatActivity {
                         } else {
                             onSaveFailed(permit.getMessage());
                         }
-                    } else
-                        Toast.makeText(IjinActivity.this, "Terjadi gangguan koneksi ke server", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<DataIjin> call, @NonNull Throwable t) {
                     Log.d(TAG, "onFailure: " + t.getMessage());
+                    binding.btnSubmit.setEnabled(true);
+                    progressDialog.dismiss();
+                    Toast.makeText(IjinActivity.this, "Terjadi gangguan koneksi ke server", Toast.LENGTH_SHORT).show();
                 }
             });
         } catch (Exception e) {
@@ -233,11 +208,6 @@ public class IjinActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IJIN) {
-            if (resultCode == RESULT_OK) {
-                this.finish();
-            }
-        }
 
         if (requestCode == 1212 && resultCode == RESULT_OK && data != null) {
             // Get the Uri of the selected file

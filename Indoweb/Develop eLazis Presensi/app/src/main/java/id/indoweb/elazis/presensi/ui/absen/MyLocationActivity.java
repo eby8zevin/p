@@ -4,28 +4,28 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.text.Layout;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.AlignmentSpan;
+import android.text.style.StyleSpan;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import id.indoweb.elazis.presensi.ui.MainActivity;
-import id.indoweb.elazis.presensi.R;
-import id.indoweb.elazis.presensi.databinding.MyLocationDemoBinding;
-import id.indoweb.elazis.presensi.helper.GlobalVar;
-import id.indoweb.elazis.presensi.helper.NewGPSTracker;
-import id.indoweb.elazis.presensi.helper.SessionManager;
-import id.indoweb.elazis.presensi.model.DataPonpes;
-import id.indoweb.elazis.presensi.model.DataUser;
-import id.indoweb.elazis.presensi.model.LocationModel;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -43,12 +43,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import id.indoweb.elazis.presensi.R;
+import id.indoweb.elazis.presensi.databinding.MyLocationDemoBinding;
+import id.indoweb.elazis.presensi.helper.GlobalVar;
+import id.indoweb.elazis.presensi.helper.NewGPSTracker;
+import id.indoweb.elazis.presensi.helper.SessionManager;
+import id.indoweb.elazis.presensi.model.DataPonpes;
+import id.indoweb.elazis.presensi.model.DataUser;
+import id.indoweb.elazis.presensi.model.LocationModel;
+import id.indoweb.elazis.presensi.ui.MainActivity;
+
 public class MyLocationActivity extends AppCompatActivity implements
         OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener,
         OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, LocationListener {
+        ActivityCompat.OnRequestPermissionsResultCallback,
+        LocationListener {
 
+    private static final String TAG = "MyLocationActivity";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
     private boolean validationLocation = true;
@@ -86,13 +98,36 @@ public class MyLocationActivity extends AppCompatActivity implements
         geocoder = new Geocoder(this);
 
         getSession();
-        radius_location = Integer.parseInt(dataUser.getJarak_radius());
+        setDestLocation();
+        setStatusUser();
+        customDialog();
+        binding.layoutConfirm.setVisibility(View.GONE);
 
         Intent intent = getIntent();
         if (intent != null) TYPE = intent.getStringExtra(GlobalVar.PARAM_TYPE_ABSENSI);
 
         binding.btnBack.setOnClickListener(v -> back());
         binding.infoToolbarTitle.setText(String.format("Absen %s", TYPE));
+
+        SupportMapFragment mapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        Objects.requireNonNull(mapFragment).getMapAsync(this);
+    }
+
+    private void customDialog() {
+        SpannableString titleDialog = new SpannableString("Pilih Titik Lokasi \nAbsensi Dulu Ya...");
+        titleDialog.setSpan(
+                new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+                0,
+                titleDialog.length(),
+                0
+        );
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle(titleDialog);
+        alertDialog.setPositiveButton("OK", (dialogInterface, i) -> dialogInterface.cancel());
+
+        alertDialog.create().show();
     }
 
     @Override
@@ -116,8 +151,101 @@ public class MyLocationActivity extends AppCompatActivity implements
                     .position(latLng.get(i))
                     .title("LOKASI ABSENSI")
                     .snippet(dataUser.getArea().get(i).getLokasi()));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Objects.requireNonNull(circleoptions.getCenter()), 15.0f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(Objects.requireNonNull(circleoptions.getCenter()), 15));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng.get(i)));
+        }
+    }
+
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "Jarak dari lokasi Absen: " + getReadableDistance(distance), Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Jarak dari lokasi Absen: " + getReadableDistance(distance), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+        mLastLocation = location;
+        distance = mLastLocation.distanceTo(destLocation);
+        if (locationModel == null) {
+            if (mLastLocation != null)
+                locationModel = new LocationModel(0.0, 0.0);
+        }
+        Objects.requireNonNull(locationModel).setLatitude(mLastLocation.getLatitude());
+        locationModel.setLongitude(mLastLocation.getLongitude());
+
+        mMap.setOnMarkerClickListener(marker -> {
+            binding.layoutConfirm.setVisibility(View.VISIBLE);
+            binding.btnLocConfirm.setVisibility(View.VISIBLE);
+
+            try {
+                addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+                String address = addresses.get(0).getAddressLine(0);
+                //binding.tvMapAddress.setText(String.format("%s %s ,%s", marker.getSnippet(), dataPonpes.getNamaPonpes(), address));
+                Log.i(TAG, address);
+
+                SpannableStringBuilder textMap = new SpannableStringBuilder()
+                        .append("Anda melakukan Absensi ")
+                        .append(TYPE, new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        .append(" di ")
+                        .append(marker.getSnippet(), new StyleSpan(Typeface.BOLD), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        .append(" ")
+                        .append(dataPonpes.getNamaPonpes());
+                binding.tvMapAddress.setText(textMap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            destLocation.setLatitude(marker.getPosition().latitude);
+            destLocation.setLongitude(marker.getPosition().longitude);
+
+            distance = mLastLocation.distanceTo(destLocation);
+            destLocationName = marker.getSnippet();
+            binding.btnLocConfirm.setOnClickListener(v -> check(distance, destLocationName));
+            return false;
+        });
+
+        mMap.setOnMapClickListener(latLng1 -> {
+            binding.layoutConfirm.setVisibility(View.VISIBLE);
+            binding.tvMapAddress.setText("Pilih Titik Lokasi \nAbsensi Dulu Ya...");
+            binding.btnLocConfirm.setVisibility(View.GONE);
+        });
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        if (locationModel == null) {
+            locationModel = new LocationModel(0.0, 0.0);
+        }
+
+        if (mPermissionDenied) {
+            PermissionUtils.PermissionDeniedDialog
+                    .newInstance(true).show(getSupportFragmentManager(), "dialog");
+            mPermissionDenied = false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            return;
+        }
+
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
+                Manifest.permission.ACCESS_FINE_LOCATION)) {
+            enableMyLocation();
+        } else {
+            mPermissionDenied = true;
         }
     }
 
@@ -146,78 +274,19 @@ public class MyLocationActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(this, "Jarak dari lokasi Absen: " + getReadableDistance(distance), Toast.LENGTH_SHORT).show();
-        return false;
-    }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(this, "Jarak dari lokasi Absen: " + getReadableDistance(distance), Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
-            return;
-        }
-
-        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
-            enableMyLocation();
-        } else {
-            mPermissionDenied = true;
-        }
-    }
-
-    @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
-        if (locationModel == null) {
-            locationModel = new LocationModel(0.0, 0.0);
-        }
-
-        if (mPermissionDenied) {
-            PermissionUtils.PermissionDeniedDialog
-                    .newInstance(true).show(getSupportFragmentManager(), "dialog");
-            mPermissionDenied = false;
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17.0f));
-        mLastLocation = location;
-        distance = mLastLocation.distanceTo(destLocation);
-        if (locationModel == null) {
-            if (mLastLocation != null)
+    private boolean isLocationModelEmpty() {
+        if (mLastLocation != null) {
+            if (locationModel == null) {
                 locationModel = new LocationModel(0.0, 0.0);
-        }
-        Objects.requireNonNull(locationModel).setLatitude(mLastLocation.getLatitude());
-        locationModel.setLongitude(mLastLocation.getLongitude());
-
-        mMap.setOnMarkerClickListener(marker -> {
-            try {
-                addresses = geocoder.getFromLocation(mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-                String address = addresses.get(0).getAddressLine(0);
-                binding.tvMapAddress.setText(String.format("%s %s ,%s", marker.getSnippet(), dataPonpes.getNamaPonpes(), address));
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-
-            destLocation.setLatitude(marker.getPosition().latitude);
-            destLocation.setLongitude(marker.getPosition().longitude);
-
-            distance = mLastLocation.distanceTo(destLocation);
-            destLocationName = marker.getSnippet();
-            binding.btnLocConfirm.setOnClickListener(v -> check(distance, destLocationName));
-            return false;
-        });
+            if (locationModel.getLatitude() == null)
+                locationModel.setLatitude(mLastLocation.getLatitude());
+            if (locationModel.getLongitude() == null)
+                locationModel.setLongitude(mLastLocation.getLongitude());
+        } else {
+            return true;
+        }
+        return false;
     }
 
     private void check(Float distance, String destLocation) {
@@ -248,15 +317,16 @@ public class MyLocationActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (locationModel == null) {
-            locationModel = new LocationModel(0.0, 0.0);
+    private String getReadableDistance(float size) {
+        if (size <= 0) {
+            return "0";
         }
-        getSession();
-        System.out.println("cek: " + dataUser.getArea().size());
+        final String[] units = new String[]{"Meter", "KM", "MM", "GM", "TM"};
+        int digitGroups = (int) (Math.log10(size) / Math.log10(1000));
+        return new DecimalFormat("#,##0.#").format(size / Math.pow(1000, digitGroups)) + " " + units[digitGroups];
+    }
 
+    private void setDestLocation() {
         destLocation = new Location(LocationManager.GPS_PROVIDER);
         for (int i = 0; i < dataUser.getArea().size(); i++) {
             destLocation.setLatitude(dataUser.getArea().get(i).getLatitude());
@@ -265,7 +335,9 @@ public class MyLocationActivity extends AppCompatActivity implements
             destLocationName = dataUser.getArea().get(i).getLokasi();
             latLng.add(new LatLng(dataUser.getArea().get(i).getLatitude(), dataUser.getArea().get(i).getLongitude()));
         }
+    }
 
+    private void setStatusUser() {
         radius_location = Integer.parseInt(dataUser.getJarak_radius().equals("") ? "0" : dataUser.getJarak_radius());
         if (dataUser.getValidasi().equalsIgnoreCase("y")) {
             validationLocation = true;
@@ -278,39 +350,6 @@ public class MyLocationActivity extends AppCompatActivity implements
         } else {
             validationLocation = false;
         }
-
-        SupportMapFragment mapFragment =
-                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        Objects.requireNonNull(mapFragment).getMapAsync(this);
-    }
-
-    private void getSession() {
-        dataUser = session.getSessionDataUser();
-        dataPonpes = session.getSessionDataPonpes();
-    }
-
-    private String getReadableDistance(float size) {
-        if (size <= 0) {
-            return "0";
-        }
-        final String[] units = new String[]{"Meter", "KM", "MM", "GM", "TM"};
-        int digitGroups = (int) (Math.log10(size) / Math.log10(1000));
-        return new DecimalFormat("#,##0.#").format(size / Math.pow(1000, digitGroups)) + " " + units[digitGroups];
-    }
-
-    private boolean isLocationModelEmpty() {
-        if (mLastLocation != null) {
-            if (locationModel == null) {
-                locationModel = new LocationModel(0.0, 0.0);
-            }
-            if (locationModel.getLatitude() == null)
-                locationModel.setLatitude(mLastLocation.getLatitude());
-            if (locationModel.getLongitude() == null)
-                locationModel.setLongitude(mLastLocation.getLongitude());
-        } else {
-            return true;
-        }
-        return false;
     }
 
     private void back() {
@@ -319,5 +358,18 @@ public class MyLocationActivity extends AppCompatActivity implements
         startActivity(i);
         finish();
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    private void getSession() {
+        dataUser = session.getSessionDataUser();
+        dataPonpes = session.getSessionDataPonpes();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (locationModel == null) {
+            locationModel = new LocationModel(0.0, 0.0);
+        }
     }
 }

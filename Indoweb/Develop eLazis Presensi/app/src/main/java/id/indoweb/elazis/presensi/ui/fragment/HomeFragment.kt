@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import id.indoweb.elazis.presensi.R
 import id.indoweb.elazis.presensi.databinding.FragmentHomeBinding
-
 import id.indoweb.elazis.presensi.helper.ApiClient
 import id.indoweb.elazis.presensi.helper.ApiInterface
 import id.indoweb.elazis.presensi.helper.GlobalVar
@@ -25,7 +24,6 @@ import id.indoweb.elazis.presensi.model.DataPonpes
 import id.indoweb.elazis.presensi.model.DataUser
 import id.indoweb.elazis.presensi.ui.absen.MyLocationActivity
 import id.indoweb.elazis.presensi.ui.izin.IjinActivity
-import id.indoweb.elazis.presensi.ui.laporan.LaporanWeb
 import io.github.muddz.styleabletoast.StyleableToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,8 +37,9 @@ class HomeFragment : Fragment() {
     private lateinit var dataPonpes: DataPonpes
 
     private var manager: LocationManager? = null
-    private var binding: FragmentHomeBinding? = null
-    private val _binding get() = binding!!
+
+    private lateinit var binding: FragmentHomeBinding
+    private val _binding get() = binding
     private val localeID: Locale = Locale("in", "ID")
 
     override fun onCreateView(
@@ -59,11 +58,9 @@ class HomeFragment : Fragment() {
         getSession()
         setUI()
         getData()
-        binding?.checkIn?.setOnClickListener { checkIn() }
-        binding?.checkOut?.setOnClickListener { checkOut() }
-        binding?.permitLeave?.setOnClickListener { permitLeave() }
-        binding?.btnReportWeb?.visibility = View.INVISIBLE
-        binding?.btnReportWeb?.setOnClickListener { reportWeb() }
+        binding.checkIn.setOnClickListener { checkIn() }
+        binding.checkOut.setOnClickListener { checkOut() }
+        binding.permitLeave.setOnClickListener { permitLeave() }
     }
 
     private fun getSession() {
@@ -73,15 +70,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUI() {
-        binding?.infoSchoolName?.text = buildString {
-            append("Sekolah ")
-            append(dataPonpes.namaPonpes)
-        }
+        binding.infoSchoolName.text = dataPonpes.namaPonpes
 
         val today: Date = Calendar.getInstance().time
         val formatter = SimpleDateFormat("EEEE, d MMMM yyyy", localeID)
         val date: String = formatter.format(today)
-        binding?.dateDay?.text = date
+        binding.dateDay.text = date
 
         val timeIndonesia = dataPonpes.getwaktu_indonesia()
         when (timeIndonesia) {
@@ -91,18 +85,21 @@ class HomeFragment : Fragment() {
             "WITA" -> {
                 TimeZone.setDefault(TimeZone.getTimeZone("Asia/Ujung_Pandang"))
             }
-            else -> {
+            "WIT" -> {
                 TimeZone.setDefault(TimeZone.getTimeZone("Asia/Jayapura"))
             }
+            else -> {
+                TimeZone.setDefault(TimeZone.getTimeZone("Asia/Jakarta"))
+            }
         }
-        binding?.gmt?.text = timeIndonesia
+        binding.gmt.text = timeIndonesia
 
-        binding?.infoUserName?.text = dataUser.nama
-        binding?.infoJob?.text = dataUser.jabatan
+        binding.infoUserName.text = dataUser.nama
+        binding.infoJob.text = dataUser.jabatan
     }
 
     private fun checkIn() {
-        if (dataUser.maxDatang.isEmpty()) {
+        if (binding.tvTimeCome.text.isEmpty()) {
             if (!manager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 buildAlertMessageNoGps()
             } else {
@@ -122,14 +119,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun checkOut() {
-        if (dataUser.maxDatang.isEmpty()) {
+        if (binding.tvTimeCome.text.isEmpty()) {
             StyleableToast.makeText(
                 requireContext(),
                 "Silahkan melakukan \nAbsen Datang terlebih dahulu.",
                 Toast.LENGTH_SHORT,
-                R.style.mytoast
+                R.style.mytoast_danger
             ).show()
-        } else if (dataUser.maxPulang.isEmpty()) {
+        } else if (binding.tvTimeGoHome.text.isEmpty()) {
             if (!manager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 buildAlertMessageNoGps()
             } else {
@@ -156,13 +153,6 @@ class HomeFragment : Fragment() {
         activity?.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
     }
 
-    private fun reportWeb() {
-        val i = Intent(requireActivity(), LaporanWeb::class.java)
-        i.putExtra(GlobalVar.PARAM_KODES_USER, dataPonpes.kodes)
-        i.putExtra(GlobalVar.PARAM_DATA_USER, dataUser.username)
-        startActivity(i)
-    }
-
     private fun buildAlertMessageNoGps() {
         val builder = AlertDialog.Builder(context)
         builder.setMessage("Sepertinya GPS mati, mohon hidupkan GPS untuk bisa melakukan absensi!")
@@ -184,16 +174,18 @@ class HomeFragment : Fragment() {
         val nip = dataUser.nip
         val password = session.pwd
         try {
+            showLoading(true)
             val apiService = ApiClient.getClient().create(ApiInterface::class.java)
             val call = apiService.checkLogin(schoolCode, nip, password)
             call.enqueue(object : Callback<DataUser?> {
                 override fun onResponse(call: Call<DataUser?>, response: Response<DataUser?>) {
+                    showLoading(false)
                     if (response.isSuccessful) {
                         dataUser = response.body()!!
-                        binding?.tvTimeCome?.text = dataUser.maxDatang
-                        binding?.tvTimeGoHome?.text = dataUser.maxPulang
+                        binding.tvTimeCome.text = dataUser.maxDatang
+                        binding.tvTimeGoHome.text = dataUser.maxPulang
 
-                        binding?.let {
+                        binding.let {
                             Glide.with(this@HomeFragment)
                                 .load(dataUser.photo)
                                 .error(R.drawable.profile)
@@ -203,12 +195,25 @@ class HomeFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<DataUser?>, t: Throwable) {
-                    Log.e("HomeFragment", "onFailure: " + t.message)
+                    showLoading(false)
+                    Log.e(TAG, "onFailure: " + t.message)
                 }
             })
         } catch (e: Exception) {
-            Log.e("HomeFragment", e.toString())
+            Log.e(TAG, e.toString())
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
+    }
+
+    companion object {
+        private const val TAG = "HomeFragment"
     }
 
     override fun onResume() {
@@ -216,10 +221,5 @@ class HomeFragment : Fragment() {
         getSession()
         setUI()
         getData()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }

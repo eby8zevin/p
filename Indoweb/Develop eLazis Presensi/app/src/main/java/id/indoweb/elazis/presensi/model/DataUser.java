@@ -1,7 +1,5 @@
 package id.indoweb.elazis.presensi.model;
 
-import androidx.annotation.NonNull;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -13,9 +11,17 @@ public class DataUser {
     @Expose
     private Boolean isCorrect;
 
+    @SerializedName("message")
+    @Expose
+    private String message;
+
     @SerializedName("username")
     @Expose
     private String username;
+
+    @SerializedName("jabatan")
+    @Expose
+    private String jabatan;
 
     @SerializedName("nama")
     @Expose
@@ -29,21 +35,13 @@ public class DataUser {
     @Expose
     private String roleId;
 
-    @SerializedName("area")
+    @SerializedName("phone")
     @Expose
-    private List<Area> area;
-
-    @SerializedName("validasi")
-    @Expose
-    private String validasi;
+    private String phone;
 
     @SerializedName("email")
     @Expose
     private String email;
-
-    @SerializedName("photo")
-    @Expose
-    private String photo;
 
     @SerializedName("max_datang")
     @Expose
@@ -53,21 +51,21 @@ public class DataUser {
     @Expose
     private String max_pulang;
 
+    @SerializedName("validasi")
+    @Expose
+    private String validasi;
+
+    @SerializedName("photo")
+    @Expose
+    private String photo;
+
+    @SerializedName("area")
+    @Expose
+    private List<Area> area;
+
     @SerializedName("jarak_radius")
     @Expose
     private String jarak_radius;
-
-    @SerializedName("message")
-    @Expose
-    private String message;
-
-    @SerializedName("jabatan")
-    @Expose
-    private String jabatan;
-
-    @SerializedName("phone")
-    @Expose
-    private String phone;
 
     public DataUser() {
     }
@@ -190,27 +188,5 @@ public class DataUser {
 
     public void setJabatan(String jabatan) {
         this.jabatan = jabatan;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return "DataUser{" +
-                "isCorrect=" + isCorrect +
-                ", username='" + username + '\'' +
-                ", nama='" + nama + '\'' +
-                ", nip='" + nip + '\'' +
-                ", roleId='" + roleId + '\'' +
-                ", area='" + area + '\'' +
-                ", validasi='" + validasi + '\'' +
-                ", max_datang='" + max_datang + '\'' +
-                ", max_pulang='" + max_pulang + '\'' +
-                ", jarak_radius='" + jarak_radius + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", photo='" + photo + '\'' +
-                ", message='" + message + '\'' +
-                ", jabatan='" + jabatan + '\'' +
-                '}';
     }
 }

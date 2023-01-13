@@ -4,11 +4,12 @@ package id.indoweb.elazis.presensi.ui.absen
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -30,6 +31,8 @@ import org.apache.http.entity.mime.content.FileBody
 import org.apache.http.entity.mime.content.StringBody
 import org.apache.http.impl.client.DefaultHttpClient
 import org.apache.http.util.EntityUtils
+import org.json.JSONException
+import org.json.JSONObject
 import java.io.File
 import java.io.IOException
 import java.text.DecimalFormat
@@ -40,6 +43,8 @@ import kotlin.math.pow
 class UploadImage : AppCompatActivity() {
 
     var totalSize: Long = 0
+    private lateinit var progressDialog: ProgressDialog
+
     private var session: SessionManager? = null
     private var datPonpes: HashMap<String, String>? = null
     private var datUser: HashMap<String, String>? = null
@@ -47,19 +52,17 @@ class UploadImage : AppCompatActivity() {
     private var compressedImage: File? = null
     private var locationModel: LocationModel? = null
 
-    //Declare my Handler in global to be used also in onResume() method
-    private var myHandler: Handler? = null
-    private var notResumed = false
-
     private var destLocation: String? = null
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var binding: ActivityUploadImageBinding
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUploadImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         // Checking camera availability
         if (!Utils.isDeviceSupportCamera(applicationContext)) {
             Toast.makeText(
@@ -71,6 +74,7 @@ class UploadImage : AppCompatActivity() {
         }
 
         getSession()
+        getLoading()
         startCountdown()
 
         val intent = intent
@@ -107,6 +111,13 @@ class UploadImage : AppCompatActivity() {
         startActivity(i)
         finish()
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
+    }
+
+    private fun getLoading() {
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Mohon tunggu ...")
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        progressDialog.setCancelable(false)
     }
 
     private fun openCamera() {
@@ -149,7 +160,7 @@ class UploadImage : AppCompatActivity() {
                     else -> {
                         Toast.makeText(
                             this@UploadImage,
-                            "Ambil Foto Batal",
+                            "Ambil Foto Batal!",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -176,7 +187,7 @@ class UploadImage : AppCompatActivity() {
             ).show()
         } else {
             countDownTimer.cancel()
-            Utils.showProgressDialog(this, "Mohon tunggu ...").show()
+            progressDialog.show()
             UploadFileToServer().execute()
         }
     }
@@ -192,13 +203,16 @@ class UploadImage : AppCompatActivity() {
             super.onPreExecute()
         }
 
+        @Deprecated("Deprecated in Java")
+        override fun doInBackground(vararg p0: Void?): String? {
+            return uploadFile()
+        }
+
         private fun uploadFile(): String? {
             var responseString: String?
             val httpclient: HttpClient = DefaultHttpClient()
-            val domains = datPonpes?.get(SessionManager.KEY_DOMAIN_PONPES).toString()
 
-            val httpPost = if (domains == "demo") HttpPost(ApiClient.FILE_UPLOAD_URL_DEMO)
-            else HttpPost(ApiClient.FILE_UPLOAD_URL)
+            val httpPost = HttpPost(ApiClient.FILE_UPLOAD_URL)
 
             try {
                 val entity =
@@ -217,24 +231,20 @@ class UploadImage : AppCompatActivity() {
 
                 // Extra parameters if you want to pass to server
                 entity.addPart(
-                    "device_id",
-                    StringBody(session!!.deviceData.deviceId)
-                )
-                entity.addPart(
-                    "imei",
-                    StringBody(session!!.deviceData.imei)
+                    "kode_lembaga",
+                    StringBody(datPonpes!![SessionManager.KEY_KODES].toString())
                 )
                 entity.addPart(
                     "id_pegawai",
                     StringBody(datUser!![SessionManager.KEY_USERNAME].toString())
                 )
                 entity.addPart(
-                    "kode_sekolah",
-                    StringBody(datPonpes!![SessionManager.KEY_KODES].toString())
+                    "type",
+                    StringBody(typePresent)
                 )
                 entity.addPart(
-                    "domain",
-                    StringBody(datPonpes!![SessionManager.KEY_DOMAIN_PONPES].toString())
+                    "lokasi",
+                    StringBody(binding.locUser.text.toString())
                 )
                 entity.addPart(
                     "longi",
@@ -247,14 +257,9 @@ class UploadImage : AppCompatActivity() {
                 )
                 Log.i("UPLOAD", "latitude:" + locationModel!!.latitude)
                 entity.addPart(
-                    "type",
-                    StringBody(typePresent)
-                )
-                entity.addPart(
                     "keterangan",
                     StringBody(binding.inputNotes.text.toString())
                 )
-                entity.addPart("lokasi", StringBody(binding.locUser.text.toString()))
                 totalSize = entity.contentLength
                 httpPost.entity = entity
 
@@ -279,26 +284,43 @@ class UploadImage : AppCompatActivity() {
         @Deprecated("Deprecated in Java")
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
-            Log.i("Response From Server", "$result")
-            toAfterPresent()
-        }
 
-        @Deprecated("Deprecated in Java")
-        override fun doInBackground(vararg p0: Void?): String? {
-            return uploadFile()
+            var resError: Boolean? = null
+            var resMessage: String? = null
+            Log.e(TAG, "Response From Server: $result")
+            try {
+                val jsonObject = JSONObject(result.toString())
+                resError = jsonObject.optBoolean("is_correct")
+                resMessage = jsonObject.optString("message")
+            } catch (e: JSONException) {
+                e.printStackTrace()
+            }
+
+            progressDialog.dismiss()
+            if (resError == true) {
+                Log.e(TAG, "response: $resMessage")
+                toAfterPresent(resMessage.toString())
+            } else {
+                StyleableToast.makeText(
+                    this@UploadImage,
+                    "$resMessage",
+                    Toast.LENGTH_SHORT,
+                    R.style.mytoast_danger
+                ).show()
+            }
         }
     }
 
-    private fun toAfterPresent() {
+    private fun toAfterPresent(response: String) {
         val i = Intent(this, AfterAbsen::class.java)
-        i.putExtra(GlobalVar.PARAM_TYPE_ABSENSI, typePresent)
+        i.putExtra(GlobalVar.PARAM_TYPE_ABSENSI, response)
         startActivity(i)
         finish()
         overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out)
     }
 
     private fun startCountdown() {
-        val duration = 30 * 1000
+        val duration = 60 * 1000
         countDownTimer = object : CountDownTimer(duration.toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 val milis = String.format(
@@ -313,16 +335,14 @@ class UploadImage : AppCompatActivity() {
                 )
                 binding.btnSend.text = milis
                 println(milis)
-
-                if (millisUntilFinished <= 1000)
-                    Toast.makeText(
-                        this@UploadImage,
-                        "Waktu habis.\nSilahkan absen ulang",
-                        Toast.LENGTH_SHORT
-                    ).show()
             }
 
             override fun onFinish() {
+                Toast.makeText(
+                    this@UploadImage,
+                    "Waktu habis. Silahkan absen ulang !",
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
             }
         }
@@ -334,15 +354,7 @@ class UploadImage : AppCompatActivity() {
         getSession()
     }
 
-    public override fun onStop() {
-        super.onStop()
-        notResumed = true
-        myHandler = Handler()
-        myHandler!!.postDelayed({ if (notResumed) finish() }, 20000)
-    }
-
-    public override fun onDestroy() {
-        super.onDestroy()
-        Log.d("debug", "onDestroyCalled")
+    companion object {
+        private const val TAG = "UploadImage"
     }
 }

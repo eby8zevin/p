@@ -3,6 +3,7 @@ package id.indoweb.elazis.presensi.ui
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.provider.Settings
 import android.telephony.TelephonyManager
@@ -35,11 +36,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomePageBinding
 
+    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         if (!TrueTimeRx.isInitialized()) {
             Toast.makeText(this, "Sorry TrueTime not yet initialized.", Toast.LENGTH_SHORT).show()
             return

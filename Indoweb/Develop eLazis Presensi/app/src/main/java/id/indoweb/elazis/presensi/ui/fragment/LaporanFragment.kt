@@ -57,8 +57,8 @@ class LaporanFragment : Fragment(),
     private var selectMonth: String? = null
     private var selectYear: String? = null
 
-    private var binding: FragmentLaporanBinding? = null
-    private val _binding get() = binding!!
+    private lateinit var binding: FragmentLaporanBinding
+    private val _binding get() = binding
     private val localeID: Locale = Locale("in", "ID")
 
     override fun onCreateView(
@@ -79,7 +79,7 @@ class LaporanFragment : Fragment(),
 
         spinnerMonth()
         spinnerYear()
-        binding?.toAttendanceYear?.setOnClickListener { attendanceYear() }
+        binding.toAttendanceYear.setOnClickListener { attendanceYear() }
     }
 
     private fun getSession() {
@@ -90,7 +90,7 @@ class LaporanFragment : Fragment(),
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun spinnerMonth() {
-        binding?.spinnerMonth?.onItemSelectedListener = this
+        binding.spinnerMonth.onItemSelectedListener = this
 
         val formatter = SimpleDateFormat("MMMM", localeID)
         val listMonth = arrayListOf<String>()
@@ -104,19 +104,19 @@ class LaporanFragment : Fragment(),
 
         val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, listMonth)
         adapter.setDropDownViewResource(R.layout.item_spinner_radio_btn)
-        binding?.spinnerMonth?.adapter = adapter
+        binding.spinnerMonth.adapter = adapter
 
         val current = LocalDateTime.now()
         val pattern = DateTimeFormatter.ofPattern("MMMM", localeID)
         val mNow = current.format(pattern)
 
         val position: Int = adapter.getPosition(mNow)
-        binding?.spinnerMonth?.setSelection(position)
+        binding.spinnerMonth.setSelection(position)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun spinnerYear() {
-        binding?.spinnerYear?.onItemSelectedListener = this
+        binding.spinnerYear.onItemSelectedListener = this
 
         val listYear = arrayListOf<String>()
         val year = Calendar.getInstance().get(Calendar.YEAR)
@@ -126,19 +126,19 @@ class LaporanFragment : Fragment(),
 
         val adapter = ArrayAdapter(requireContext(), R.layout.item_spinner, listYear)
         adapter.setDropDownViewResource(R.layout.item_spinner_radio_btn)
-        binding?.spinnerYear?.adapter = adapter
+        binding.spinnerYear.adapter = adapter
 
         val current = LocalDateTime.now()
         val pattern = DateTimeFormatter.ofPattern("yyyy", localeID)
         val yNow = current.format(pattern)
 
         val position: Int = adapter.getPosition(yNow)
-        binding?.spinnerYear?.setSelection(position)
+        binding.spinnerYear.setSelection(position)
     }
 
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-        selectMonth = binding?.spinnerMonth?.selectedItem.toString()
-        selectYear = binding?.spinnerYear?.selectedItem.toString()
+        selectMonth = binding.spinnerMonth.selectedItem.toString()
+        selectYear = binding.spinnerYear.selectedItem.toString()
         getData()
     }
 
@@ -150,6 +150,7 @@ class LaporanFragment : Fragment(),
         val idEmployee: String = user.username
 
         try {
+            showLoading(true)
             val apiService = ApiClient.getClient().create(ApiInterface::class.java)
             val call = apiService.getDataLaporan(
                 schoolCode,
@@ -164,14 +165,14 @@ class LaporanFragment : Fragment(),
                     call: Call<DataLaporan?>,
                     response: Response<DataLaporan?>
                 ) {
+                    showLoading(false)
                     if (response.isSuccessful) {
                         val res = response.body()!!
                         setUI(
                             res.percentase,
                             res.percentase_hari,
                             res.hadir,
-                            res.izin_cuti,
-                            res.alpa,
+                            res.izin_sakit,
                             res.terlambat,
                             res.hadir_tahun_ini,
                             res.rekap!!
@@ -186,10 +187,10 @@ class LaporanFragment : Fragment(),
                 }
 
                 override fun onFailure(call: Call<DataLaporan?>, t: Throwable) {
+                    showLoading(false)
                     Log.e("LaporanFragment", "onFailure: " + t.message)
                 }
             })
-
         } catch (e: Exception) {
             Log.e("LaporanFragment", e.toString())
         }
@@ -200,36 +201,27 @@ class LaporanFragment : Fragment(),
         dayProgress: String,
         present: String,
         permitLeave: String,
-        alpha: Int,
         late: String,
         presentYear: String,
         recap: MutableList<Rekap>
     ) {
-        binding?.rvPresence?.setHasFixedSize(true)
-        binding?.rvPresence?.itemAnimator = DefaultItemAnimator()
-        binding?.rvPresence?.layoutManager = LinearLayoutManager(requireContext())
+        binding.progressValue.text = "$valueProgress"
+        binding.progressDay.text = dayProgress
+        binding.progressBar.progress = (valueProgress / 100)
 
-        binding?.progressValue?.text = "$valueProgress"
-        binding?.progressDay?.text = dayProgress
-        binding?.progressBar?.progress = (valueProgress / 100)
-
-        binding?.presentValue?.text = buildString {
+        binding.presentValue.text = buildString {
             append(present)
             append(" Hari")
         }
-        binding?.permitLeaveValue?.text = buildString {
+        binding.permitLeaveValue.text = buildString {
             append(permitLeave)
             append(" Hari")
         }
-        binding?.alphaValue?.text = buildString {
-            append(alpha)
+        binding.lateValue.text = buildString {
+            append(late)
             append(" Hari")
         }
-        binding?.lateValue?.text = buildString {
-            append(late)
-            append(" Jam")
-        }
-        binding?.percentageYear?.text = presentYear
+        binding.percentageYear.text = presentYear
 
         dataKehadiran = recap
         adapter = ListRekapKehadiranAdapter(
@@ -237,7 +229,21 @@ class LaporanFragment : Fragment(),
             dataKehadiran!!,
             this@LaporanFragment
         )
-        binding?.rvPresence?.adapter = adapter
+
+        binding.rvPresence.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPresence.itemAnimator = DefaultItemAnimator()
+        binding.rvPresence.setHasFixedSize(true)
+        binding.rvPresence.adapter = adapter
+
+        if (dataKehadiran!!.size <= 0) {
+            binding.headerRv.visibility = View.GONE
+            binding.ivNotFound.visibility = View.VISIBLE
+            binding.tvNotFound.visibility = View.VISIBLE
+        } else {
+            binding.headerRv.visibility = View.VISIBLE
+            binding.ivNotFound.visibility = View.GONE
+            binding.tvNotFound.visibility = View.GONE
+        }
     }
 
     private fun attendanceYear() {
@@ -265,11 +271,11 @@ class LaporanFragment : Fragment(),
                         R.color.colorPrimaryDark
                     )
                 )
-            "Sakit" -> view.findViewById<TextView>(R.id.txt_status)
+            "Ijin" -> view.findViewById<TextView>(R.id.txt_status)
                 .setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-            "Cuti" -> view.findViewById<TextView>(R.id.txt_status)
+            "Sakit" -> view.findViewById<TextView>(R.id.txt_status)
                 .setTextColor(ContextCompat.getColor(requireContext(), R.color.lime_dark))
-            "Keperluan Lain" -> view.findViewById<TextView>(R.id.txt_status)
+            "Lain-lain" -> view.findViewById<TextView>(R.id.txt_status)
                 .setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
         }
 
@@ -293,14 +299,17 @@ class LaporanFragment : Fragment(),
         }
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressLoading.visibility = View.VISIBLE
+        } else {
+            binding.progressLoading.visibility = View.GONE
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         getSession()
         getData()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }

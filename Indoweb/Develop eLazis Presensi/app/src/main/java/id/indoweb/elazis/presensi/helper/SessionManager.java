@@ -191,6 +191,14 @@ public class SessionManager {
         return data;
     }
 
+    /**
+     * Quick check for login
+     **/
+    // Get Login State
+    public boolean isLoggedIn() {
+        return pref.getBoolean(IS_LOGIN, false);
+    }
+
     // MainActivity
     public void saveDeviceData(DeviceData data) {
         editor.putString(KEY_IMEI, data.getImei());
